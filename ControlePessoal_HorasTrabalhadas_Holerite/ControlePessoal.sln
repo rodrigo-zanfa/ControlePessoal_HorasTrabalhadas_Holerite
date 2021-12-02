@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlePessoal.Data", "ControlePessoal.Data\ControlePessoal.Data.csproj", "{AE2D471A-E54E-44E0-83A1-34EF9CBF7C34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlePessoal.Model", "ControlePessoal.Model\ControlePessoal.Model.csproj", "{1E3778F6-BBB5-42B9-A4DB-E745A6DD515B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE2D471A-E54E-44E0-83A1-34EF9CBF7C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE2D471A-E54E-44E0-83A1-34EF9CBF7C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE2D471A-E54E-44E0-83A1-34EF9CBF7C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE2D471A-E54E-44E0-83A1-34EF9CBF7C34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E3778F6-BBB5-42B9-A4DB-E745A6DD515B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E3778F6-BBB5-42B9-A4DB-E745A6DD515B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E3778F6-BBB5-42B9-A4DB-E745A6DD515B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E3778F6-BBB5-42B9-A4DB-E745A6DD515B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B300B45-D5E9-4118-B878-6BA6E11C19DE}
+	EndGlobalSection
+EndGlobal
