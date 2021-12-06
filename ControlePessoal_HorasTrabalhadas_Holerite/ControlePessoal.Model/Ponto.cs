@@ -13,6 +13,6 @@ namespace ControlePessoal.Model
         public DateTime DataHoraPonto { get; set; }
         public DateTime DataHoraInclusao { get; set; }
 
-        public Usuario Usuario { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }
