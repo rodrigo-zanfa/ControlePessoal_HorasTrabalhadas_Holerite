@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ControlePessoal.WebAPI.ViewModels
 {
-    public class UsuarioViewModel
+    public class RequestPostUsuarioViewModel
     {
         [Required]
         public string Nome { get; set; }

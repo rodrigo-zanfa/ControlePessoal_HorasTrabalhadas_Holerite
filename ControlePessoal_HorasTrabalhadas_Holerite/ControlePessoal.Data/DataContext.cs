@@ -12,6 +12,7 @@ namespace ControlePessoal.Data
     public class DataContext : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Ponto> Pontos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

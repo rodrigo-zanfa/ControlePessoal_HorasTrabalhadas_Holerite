@@ -25,7 +25,7 @@ namespace ControlePessoal.WebAPI.Controllers
                 .OrderBy(x => x.IdUsuario)
                 .ToListAsync();
 
-            return result == null ? NotFound() : Ok(result);
+            return result.Count == 0 ? NotFound() : Ok(result);
         }
 
         [HttpGet]
@@ -42,14 +42,14 @@ namespace ControlePessoal.WebAPI.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> PostUsuarioAsync([FromServices] DataContext dataContext, [FromBody] UsuarioViewModel postUsuario)
+        public async Task<IActionResult> PostUsuarioAsync([FromServices] DataContext dataContext, [FromBody] RequestPostUsuarioViewModel request)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             var usuario = new Usuario
             {
-                Nome = postUsuario.Nome
+                Nome = request.Nome
             };
 
             try
