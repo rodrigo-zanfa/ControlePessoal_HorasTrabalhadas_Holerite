@@ -13,6 +13,7 @@ namespace ControlePessoal.Data
     {
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Ponto> Pontos { get; set; }
+        public DbSet<Ausencia> Ausencias { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,6 +25,7 @@ namespace ControlePessoal.Data
         {
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new PontoMap());
+            modelBuilder.ApplyConfiguration(new AusenciaMap());
         }
     }
 }

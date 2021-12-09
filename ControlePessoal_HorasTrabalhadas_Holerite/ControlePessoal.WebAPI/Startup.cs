@@ -31,6 +31,9 @@ namespace ControlePessoal.WebAPI
 
             services.AddControllers();
 
+            services.AddMvc()
+                .AddNewtonsoftJson();
+
             services.AddDbContext<DataContext>();
 
             services.AddSwaggerGen(c =>

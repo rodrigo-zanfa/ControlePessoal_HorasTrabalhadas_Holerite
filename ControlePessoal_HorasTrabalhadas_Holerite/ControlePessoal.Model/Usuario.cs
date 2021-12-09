@@ -12,5 +12,6 @@ namespace ControlePessoal.Model
         public string Nome { get; set; }
 
         public virtual IEnumerable<Ponto> Pontos { get; set; }
+        public virtual IEnumerable<Ausencia> Ausencias { get; set; }
     }
 }
