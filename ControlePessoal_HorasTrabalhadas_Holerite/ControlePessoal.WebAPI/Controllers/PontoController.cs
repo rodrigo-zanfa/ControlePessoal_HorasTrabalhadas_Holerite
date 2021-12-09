@@ -60,5 +60,48 @@ namespace ControlePessoal.WebAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Message: {ex.Message} || InnerException: {ex.InnerException}");
             }
         }
+
+        [HttpPost]
+        [Route("many")]
+        public async Task<IActionResult> PostListPontosAsync([FromServices] DataContext dataContext, [FromBody] RequestPostListPontosViewModel request)
+        {
+            bool success = true;
+            string exceptionMessage = "";
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            foreach (var dataHoraPonto in request.DataHoraPonto)
+            {
+                var ponto = new Ponto
+                {
+                    IdUsuario = request.IdUsuario,
+                    DataHoraPonto = dataHoraPonto.AddSeconds(-dataHoraPonto.Second),
+                    DataHoraInclusao = DateTime.Now
+                };
+
+                try
+                {
+                    await dataContext
+                        .Pontos
+                        .AddAsync(ponto);
+                    await dataContext.SaveChangesAsync();
+
+                    //return Created($"v1/[controller]/{ponto.IdPonto}", ponto);
+                }
+                catch (Exception ex)
+                {
+                    //return StatusCode(StatusCodes.Status500InternalServerError, $"Message: {ex.Message} || InnerException: {ex.InnerException}");
+                    success = false;
+                    exceptionMessage = $"Message: {ex.Message} || InnerException: {ex.InnerException}";
+                    break;
+                }
+            }
+
+            if (success)
+                return Created($"v1/[controller]/{request.IdUsuario}", request);
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError, exceptionMessage);
+        }
     }
 }
