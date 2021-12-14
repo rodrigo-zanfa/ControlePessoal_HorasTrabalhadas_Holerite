@@ -12,7 +12,9 @@ using System.Threading.Tasks;
 
 namespace ControlePessoal.Domain.Handlers
 {
-    public class UsuarioHandler : Notifiable<Notification>, IHandler<CreateUsuarioCommand>
+    public class UsuarioHandler : Notifiable<Notification>,
+        IHandler<CreateUsuarioCommand>,
+        IHandler<UpdateUsuarioCommand>
     {
         private readonly IUsuarioRepository _repository;
 
@@ -39,6 +41,29 @@ namespace ControlePessoal.Domain.Handlers
 
             // retornar o resultado
             return new CommandResult(true, "Usuário criado com sucesso!", usuario);
+        }
+
+        public ICommandResult Handle(UpdateUsuarioCommand command)
+        {
+            // Fail Fast Validations
+            command.Validate();
+            if (!command.IsValid)
+            {
+                //AddNotifications(command);
+                return new CommandResult(false, "Não foi possível alterar o Usuário.", command.Notifications);
+            }
+
+            // recuperar a Entidade
+            var usuario = _repository.GetById(command.IdUsuario);
+
+            // alterar o Nome
+            usuario.UpdateNome(command.Nome);
+
+            // salvar
+            _repository.Update(usuario);
+
+            // retornar o resultado
+            return new CommandResult(true, "Usuário alterado com sucesso!", usuario);
         }
     }
 }

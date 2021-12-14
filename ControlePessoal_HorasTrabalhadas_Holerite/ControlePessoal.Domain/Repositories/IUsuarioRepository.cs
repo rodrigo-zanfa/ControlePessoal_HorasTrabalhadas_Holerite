@@ -11,5 +11,6 @@ namespace ControlePessoal.Domain.Repositories
     {
         void Create(Usuario usuario);
         void Update(Usuario usuario);
+        Usuario GetById(int idUsuario);
     }
 }
