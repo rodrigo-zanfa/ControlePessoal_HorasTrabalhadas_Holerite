@@ -26,6 +26,7 @@ namespace ControlePessoal.Domain.Tests.Handlers
         public void DadoUmCreateCommandInvalidoDeveInterromperAExecucao()
         {
             var result = (CommandResult)_handler.Handle(_invalidCreateCommand);
+
             Assert.AreEqual(result.Success, false);
         }
 
@@ -33,6 +34,7 @@ namespace ControlePessoal.Domain.Tests.Handlers
         public void DadoUmCreateCommandValidoDeveCriarOUsuario()
         {
             var result = (CommandResult)_handler.Handle(_validCreateCommand);
+
             Assert.AreEqual(result.Success, true);
         }
 
@@ -40,6 +42,7 @@ namespace ControlePessoal.Domain.Tests.Handlers
         public void DadoUmUpdateCommandInvalidoDeveInterromperAExecucao()
         {
             var result = (CommandResult)_handler.Handle(_invalidUpdateCommand);
+
             Assert.AreEqual(result.Success, false);
         }
 
@@ -47,6 +50,7 @@ namespace ControlePessoal.Domain.Tests.Handlers
         public void DadoUmUpdateCommandValidoDeveCriarOUsuario()
         {
             var result = (CommandResult)_handler.Handle(_validUpdateCommand);
+
             Assert.AreEqual(result.Success, true);
         }
     }

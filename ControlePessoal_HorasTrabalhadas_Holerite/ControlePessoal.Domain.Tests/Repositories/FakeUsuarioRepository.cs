@@ -10,6 +10,18 @@ namespace ControlePessoal.Domain.Tests.Repositories
 {
     public class FakeUsuarioRepository : IUsuarioRepository
     {
+        private IList<Usuario> _usuarios;
+
+        public FakeUsuarioRepository()
+        {
+            _usuarios = new List<Usuario>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                _usuarios.Add(new Usuario(i, $"USUÁRIO {i}"));
+            }
+        }
+
         public void Create(Usuario usuario)
         {
 
@@ -20,10 +32,14 @@ namespace ControlePessoal.Domain.Tests.Repositories
 
         }
 
+        public IEnumerable<Usuario> GetAll()
+        {
+            return _usuarios;
+        }
+
         public Usuario GetById(int idUsuario)
         {
-            // TODO: testar se funciona retornando sem Id
-            return new Usuario("USUÁRIO FAKE");
+            return _usuarios.Where(x => x.IdUsuario == idUsuario).FirstOrDefault();
         }
     }
 }

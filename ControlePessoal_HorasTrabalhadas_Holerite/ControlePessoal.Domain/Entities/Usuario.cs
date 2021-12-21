@@ -14,6 +14,12 @@ namespace ControlePessoal.Domain.Entities
             Nome = nome;
         }
 
+        public Usuario(int idUsuario, string nome)
+        {
+            IdUsuario = idUsuario;
+            Nome = nome;
+        }
+
         public int IdUsuario { get; private set; }
         public string Nome { get; private set; }
 

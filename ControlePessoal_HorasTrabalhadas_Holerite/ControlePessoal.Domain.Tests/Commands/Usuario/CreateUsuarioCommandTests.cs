@@ -18,6 +18,7 @@ namespace ControlePessoal.Domain.Tests.Commands.Usuario
         public void DadoUmCreateCommandInvalido()
         {
             _invalidCreateCommand.Validate();
+
             Assert.AreEqual(_invalidCreateCommand.IsValid, false);
         }
 
@@ -25,6 +26,7 @@ namespace ControlePessoal.Domain.Tests.Commands.Usuario
         public void DadoUmCreateCommandValido()
         {
             _validCreateCommand.Validate();
+
             Assert.AreEqual(_validCreateCommand.IsValid, true);
         }
     }

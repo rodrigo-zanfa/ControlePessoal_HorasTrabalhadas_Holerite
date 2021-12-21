@@ -55,6 +55,10 @@ namespace ControlePessoal.Domain.Handlers
 
             // recuperar a Entidade
             var usuario = _repository.GetById(command.IdUsuario);
+            if (usuario == null)
+            {
+                return new CommandResult(false, "Usuário não encontrado.", null);
+            }
 
             // alterar o Nome
             usuario.UpdateNome(command.Nome);

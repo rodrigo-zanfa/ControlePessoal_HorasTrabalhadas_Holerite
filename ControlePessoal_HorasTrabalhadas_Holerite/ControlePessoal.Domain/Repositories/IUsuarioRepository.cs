@@ -11,6 +11,7 @@ namespace ControlePessoal.Domain.Repositories
     {
         void Create(Usuario usuario);
         void Update(Usuario usuario);
+        IEnumerable<Usuario> GetAll();
         Usuario GetById(int idUsuario);
     }
 }
