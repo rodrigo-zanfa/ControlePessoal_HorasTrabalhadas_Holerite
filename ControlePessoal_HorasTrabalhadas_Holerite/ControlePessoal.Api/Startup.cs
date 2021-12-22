@@ -37,10 +37,16 @@ namespace ControlePessoal.Api
 
             services.AddControllers();
 
+            services.AddMvc()
+                .AddNewtonsoftJson();
+
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<UsuarioHandler, UsuarioHandler>();
+
+            services.AddTransient<IPontoRepository, PontoRepository>();
+            services.AddTransient<PontoHandler, PontoHandler>();
 
             services.AddAuthentication(x =>
             {

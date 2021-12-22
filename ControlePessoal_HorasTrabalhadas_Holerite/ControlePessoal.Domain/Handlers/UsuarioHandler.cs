@@ -29,7 +29,6 @@ namespace ControlePessoal.Domain.Handlers
             command.Validate();
             if (!command.IsValid)
             {
-                //AddNotifications(command);
                 return new CommandResult(false, "Não foi possível criar o Usuário.", command.Notifications);
             }
 
@@ -49,7 +48,6 @@ namespace ControlePessoal.Domain.Handlers
             command.Validate();
             if (!command.IsValid)
             {
-                //AddNotifications(command);
                 return new CommandResult(false, "Não foi possível alterar o Usuário.", command.Notifications);
             }
 
@@ -60,7 +58,7 @@ namespace ControlePessoal.Domain.Handlers
                 return new CommandResult(false, "Usuário não encontrado.", null);
             }
 
-            // alterar o Nome
+            // alterar os dados
             usuario.UpdateNome(command.Nome);
 
             // salvar

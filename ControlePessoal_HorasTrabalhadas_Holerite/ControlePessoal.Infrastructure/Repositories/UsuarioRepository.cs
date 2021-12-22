@@ -20,15 +20,15 @@ namespace ControlePessoal.Infrastructure.Repositories
             _dataContext = dataContext;
         }
 
-        public void Create(Usuario usuario)
+        public void Create(Usuario entity)
         {
-            _dataContext.Usuarios.Add(usuario);
+            _dataContext.Usuarios.Add(entity);
             _dataContext.SaveChanges();
         }
 
-        public void Update(Usuario usuario)
+        public void Update(Usuario entity)
         {
-            _dataContext.Entry(usuario).State = EntityState.Modified;
+            _dataContext.Entry(entity).State = EntityState.Modified;
             _dataContext.SaveChanges();
         }
 
@@ -41,13 +41,13 @@ namespace ControlePessoal.Infrastructure.Repositories
                 .ToList();
         }
 
-        public Usuario GetById(int idUsuario)
+        public Usuario GetById(int id)
         {
             return _dataContext
                 .Usuarios
                 .AsNoTracking()
-                //.FirstOrDefault(x => x.IdUsuario == idUsuario);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
-                .Where(UsuarioQueries.GetById(idUsuario))  //.Where(x => x.IdUsuario == idUsuario)
+                //.FirstOrDefault(x => x.IdUsuario == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
+                .Where(UsuarioQueries.GetById(id))  //.Where(x => x.IdUsuario == id)
                 .FirstOrDefault();
         }
     }

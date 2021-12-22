@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ControlePessoal.Domain.Repositories
 {
-    public interface IUsuarioRepository : IRepository<Usuario>
+    public interface IPontoRepository : IRepository<Ponto>
     {
-
+        IEnumerable<Ponto> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal);
     }
 }
