@@ -11,11 +11,6 @@ namespace ControlePessoal.Domain.Commands.Usuario
 {
     public class UpdateUsuarioCommand : Notifiable<Notification>, ICommand
     {
-        public UpdateUsuarioCommand()
-        {
-
-        }
-
         public UpdateUsuarioCommand(int idUsuario, string nome)
         {
             IdUsuario = idUsuario;

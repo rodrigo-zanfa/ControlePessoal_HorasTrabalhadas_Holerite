@@ -11,11 +11,6 @@ namespace ControlePessoal.Domain.Commands.Usuario
 {
     public class CreateUsuarioCommand : Notifiable<Notification>, ICommand
     {
-        public CreateUsuarioCommand()
-        {
-
-        }
-
         public CreateUsuarioCommand(string nome)
         {
             Nome = nome;
