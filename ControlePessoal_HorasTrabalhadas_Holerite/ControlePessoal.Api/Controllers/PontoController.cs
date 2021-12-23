@@ -1,9 +1,8 @@
 ﻿using ControlePessoal.Domain.Commands.Ponto;
 using ControlePessoal.Domain.Entities;
 using ControlePessoal.Domain.Handlers;
-using ControlePessoal.Domain.Queries;
+using ControlePessoal.Domain.Queries.Shared;
 using ControlePessoal.Domain.Repositories;
-using ControlePessoal.Infrastructure.Repositories;
 using Core.CQRS.Commands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

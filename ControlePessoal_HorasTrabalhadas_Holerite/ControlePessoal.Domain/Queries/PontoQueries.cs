@@ -8,13 +8,6 @@ using System.Threading.Tasks;
 
 namespace ControlePessoal.Domain.Queries
 {
-    public class GetAllByUsuarioQuery
-    {
-        public int IdUsuario { get; set; }
-        public DateTime DataInicial { get; set; }
-        public DateTime DataFinal { get; set; }
-    }
-
     public static class PontoQueries
     {
         public static Expression<Func<Ponto, bool>> GetById(int idPonto)
