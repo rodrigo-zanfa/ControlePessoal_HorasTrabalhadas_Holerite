@@ -15,7 +15,7 @@ namespace ControlePessoal.Domain.Commands.Ponto
         {
             IdUsuario = idUsuario;
             DataPonto = dataPonto;
-            HoraPonto = horaPonto;
+            HoraPonto = new TimeSpan(horaPonto.Hours, horaPonto.Minutes, 0);
         }
 
         public int IdUsuario { get; set; }
