@@ -24,7 +24,7 @@ namespace ControlePessoal.Domain.Entities
         public string Nome { get; private set; }
 
         public virtual IEnumerable<Ponto> Pontos { get; private set; }
-        //public virtual IEnumerable<Ausencia> Ausencias { get; private set; }
+        public virtual IEnumerable<Ausencia> Ausencias { get; private set; }
 
         public void UpdateNome(string nome)
         {

@@ -48,6 +48,9 @@ namespace ControlePessoal.Api
             services.AddTransient<IPontoRepository, PontoRepository>();
             services.AddTransient<PontoHandler, PontoHandler>();
 
+            services.AddTransient<IAusenciaRepository, AusenciaRepository>();
+            services.AddTransient<AusenciaHandler, AusenciaHandler>();
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
