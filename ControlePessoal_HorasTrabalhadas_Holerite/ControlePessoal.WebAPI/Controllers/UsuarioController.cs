@@ -35,7 +35,9 @@ namespace ControlePessoal.WebAPI.Controllers
             var result = await dataContext
                 .Usuarios
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.IdUsuario == idUsuario);
+                //.FirstOrDefaultAsync(x => x.IdUsuario == idUsuario);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
+                .Where(x => x.IdUsuario == idUsuario)
+                .FirstOrDefaultAsync();
 
             return result == null ? NotFound() : Ok(result);
         }

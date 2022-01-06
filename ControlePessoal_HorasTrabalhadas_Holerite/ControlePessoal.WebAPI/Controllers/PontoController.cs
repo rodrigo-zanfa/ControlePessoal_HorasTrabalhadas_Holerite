@@ -62,7 +62,7 @@ namespace ControlePessoal.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("many")]
+        [Route("lista")]
         public async Task<IActionResult> PostListPontosAsync([FromServices] DataContext dataContext, [FromBody] RequestPostListPontosViewModel request)
         {
             bool success = true;
