@@ -1,10 +1,10 @@
 
-declare @dataInicial datetime = '2021-11-15'
-declare @dataFinal datetime = '2021-12-14'
-declare @idUsuario int = 1
-declare @horasDiarias time = '08:00'
-declare @tolerancia time = '00:10'
-declare @limiteHorasDiarias time = '02:00'
+declare @DataInicial datetime = '2021-11-15'
+declare @DataFinal datetime = '2022-01-14'
+declare @IdUsuario int = 1
+declare @HorasDiarias time = '08:00'
+declare @Tolerancia time = '00:10'
+declare @LimiteHorasDiarias time = '02:00'
 
 declare @ResumoPonto table (
 	Id int,
@@ -19,6 +19,11 @@ declare @ResumoPonto table (
 	TotalDiario time,
 	Operacao char(1),
 	Saldo time,
+	HoraAusencia1 time,
+	HoraAusencia2 time,
+	DecorridoAusencia time,
+	OperacaoComAusencia char(1),
+	SaldoComAusencia time,
 	SaldoAcumBanco time,
 	SaldoAcumReceber time
 )
@@ -28,53 +33,70 @@ declare @ResumoPonto table (
 /* preparando a tabela inicial, com o intervalo de datas solicitado e os pontos encontrados para o usuário, além dos cálculos básicos dentro do mesmo dia                         */
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
-declare @dataPonto date = @dataInicial
-while (@dataPonto <= @dataFinal)
+declare @DataPonto date = @DataInicial
+while (@DataPonto <= @DataFinal)
 begin
 	insert into @ResumoPonto (Id, DataPonto)
-	values ((select isnull(count(Id), 0) + 1 from @ResumoPonto), @dataPonto)
+	values ((select isnull(count(Id), 0) + 1 from @ResumoPonto), @DataPonto)
 
 	declare cursor_PontosUsuario cursor keyset for
-		select row_number() over (order by cast(p.HoraPonto as time)) sequencia, cast(p.HoraPonto as time) HoraPonto
+		select row_number() over (order by p.HoraPonto) Sequencia, p.HoraPonto
 		from APIPonto p
-		where p.IdUsuario = @idUsuario
-		  and cast(p.DataPonto as date) = @dataPonto
+		where p.IdUsuario = @IdUsuario
+		  and p.DataPonto = @DataPonto
 		order by p.IdPonto
-	declare @sequencia int, @HoraPonto time
+	declare @Sequencia int, @HoraPonto time
 
 	open cursor_PontosUsuario
 
-	fetch first from cursor_PontosUsuario into @sequencia, @HoraPonto
+	fetch first from cursor_PontosUsuario into @Sequencia, @HoraPonto
 
 	while @@fetch_status = 0
 	begin
-		if (@sequencia = 1)
+		if (@Sequencia = 1)
 			update @ResumoPonto set HoraPonto1 = @HoraPonto
-			where DataPonto = @dataPonto
-		else if (@sequencia = 2)
+			where DataPonto = @DataPonto
+		else if (@Sequencia = 2)
+		begin
 			update @ResumoPonto set HoraPonto2 = @HoraPonto, Decorrido1 = cast(@HoraPonto as datetime) - cast(HoraPonto1 as datetime)
-			where DataPonto = @dataPonto
-		else if (@sequencia = 3)
+			where DataPonto = @DataPonto
+
+			update @ResumoPonto set TotalDiario = Decorrido1
+			where DataPonto = @DataPonto
+		end
+		else if (@Sequencia = 3)
 			update @ResumoPonto set HoraPonto3 = @HoraPonto, Intervalo = cast(@HoraPonto as datetime) - cast(HoraPonto2 as datetime)
-			where DataPonto = @dataPonto
-		else if (@sequencia = 4)
+			where DataPonto = @DataPonto
+		else if (@Sequencia = 4)
 		begin
 			update @ResumoPonto set HoraPonto4 = @HoraPonto, Decorrido2 = cast(@HoraPonto as datetime) - cast(HoraPonto3 as datetime)
-			where DataPonto = @dataPonto
+			where DataPonto = @DataPonto
 
 			update @ResumoPonto set TotalDiario = cast(Decorrido1 as datetime) + cast(Decorrido2 as datetime)
-			where DataPonto = @dataPonto
+			where DataPonto = @DataPonto
 		end
 
-		fetch next from cursor_PontosUsuario into @sequencia, @HoraPonto
+		fetch next from cursor_PontosUsuario into @Sequencia, @HoraPonto
 	end
 
 	close cursor_PontosUsuario
 
 	deallocate cursor_PontosUsuario
 
-	set @dataPonto = dateadd(day, 1, @dataPonto)
+	set @DataPonto = dateadd(day, 1, @DataPonto)
 end
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* atualizando com as ausência encontradas para o usuário                                                                                                                         */
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+update r set
+  r.HoraAusencia1 = a.HoraInicialAusencia,
+  r.HoraAusencia2 = a.HoraFinalAusencia,
+  r.DecorridoAusencia = cast(a.HoraFinalAusencia as datetime) - cast(a.HoraInicialAusencia as datetime)
+from @ResumoPonto r
+  inner join APIAusencia a on r.DataPonto = a.DataAusencia and a.IdUsuario = @IdUsuario
 
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -83,40 +105,42 @@ end
 
 declare @Operacao char(1)
 declare @Saldo time
+declare @OperacaoComAusencia char(1)
+declare @SaldoComAusencia time
 declare @SaldoDiarioBanco time
 declare @SaldoDiarioReceber time
 declare @SaldoAcumBanco time = '00:00'
 declare @SaldoAcumReceber time = '00:00'
 
 declare cursor_ResumoPonto cursor keyset for
-	select r.Id, r.TotalDiario
+	select r.Id, r.TotalDiario, isnull(r.DecorridoAusencia, '00:00') DecorridoAusencia
 	from @ResumoPonto r
+	where r.TotalDiario is not null
 	order by r.Id
-declare @Id int, @TotalDiario time
+declare @Id int, @TotalDiario time, @DecorridoAusencia time
 
 open cursor_ResumoPonto
 
-fetch first from cursor_ResumoPonto into @Id, @TotalDiario
+fetch first from cursor_ResumoPonto into @Id, @TotalDiario, @DecorridoAusencia
 
 while @@fetch_status = 0
 begin
-	--if (cast(@TotalDiario as datetime) >= cast(@horasDiarias as datetime))
-	--	set @Operacao = '+'
-	--else
-	--	set @Operacao = '-'
+	/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+	/* calculando a operação e o saldo diário SEM CONSIDERAR a ausência                                                                                                               */
+	/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
 
-	if (cast(@TotalDiario as datetime) > cast(@horasDiarias as datetime) + cast(@tolerancia as datetime))
+	if (cast(@TotalDiario as datetime) > cast(@HorasDiarias as datetime) + cast(@Tolerancia as datetime))
 	begin
 		set @Operacao = '+'
-		set @Saldo = cast(@TotalDiario as datetime) - cast(@horasDiarias as datetime)
+		set @Saldo = cast(@TotalDiario as datetime) - cast(@HorasDiarias as datetime)
 
 		update @ResumoPonto set Operacao = @Operacao, Saldo = @Saldo
 		where Id = @Id
 	end
-	else if (cast(@TotalDiario as datetime) < cast(@horasDiarias as datetime) - cast(@tolerancia as datetime))
+	else if (cast(@TotalDiario as datetime) < cast(@HorasDiarias as datetime) - cast(@Tolerancia as datetime))
 	begin
 		set @Operacao = '-'
-		set @Saldo = cast(@horasDiarias as datetime) - cast(@TotalDiario as datetime)
+		set @Saldo = cast(@HorasDiarias as datetime) - cast(@TotalDiario as datetime)
 
 		update @ResumoPonto set Operacao = @Operacao, Saldo = @Saldo
 		where Id = @Id
@@ -127,16 +151,62 @@ begin
 		set @Saldo = '00:00'
 	end
 
-	if (@Operacao = '+')
+
+	/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+	/* calculando a operação e o saldo diário CONSIDERANDO a ausência                                                                                                                 */
+	/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+	if (@DecorridoAusencia = '00:00')
 	begin
-		if (@Saldo > @limiteHorasDiarias)
+		/* como NÃO EXISTE ausência neste dia, apenas replicar o que já foi calculado anteriormente */
+		set @OperacaoComAusencia = @Operacao
+		set @SaldoComAusencia = @Saldo
+
+		if (@OperacaoComAusencia <> '' and @SaldoComAusencia <> '00:00')
+			update @ResumoPonto set OperacaoComAusencia = @OperacaoComAusencia, SaldoComAusencia = @SaldoComAusencia
+			where Id = @Id
+	end
+	else
+	begin
+		/* como EXISTE ausência neste dia, calcular considerando as somas de TotalDiario e DecorridoAusencia - neste caso NÃO levar em consideração a Tolerancia */
+		/*if (cast(@TotalDiario as datetime) + cast(@DecorridoAusencia as datetime) > cast(@HorasDiarias as datetime))
 		begin
-			set @SaldoDiarioBanco = @limiteHorasDiarias
-			set @SaldoDiarioReceber = cast(@Saldo as datetime) - cast(@limiteHorasDiarias as datetime)
+			set @OperacaoComAusencia = '+'
+			set @SaldoComAusencia = cast(@TotalDiario as datetime) + cast(@DecorridoAusencia as datetime) - cast(@HorasDiarias as datetime)
+
+			update @ResumoPonto set OperacaoComAusencia = @OperacaoComAusencia, SaldoComAusencia = @SaldoComAusencia
+			where Id = @Id
+		end
+		else*/ if (cast(@TotalDiario as datetime) + cast(@DecorridoAusencia as datetime) < cast(@HorasDiarias as datetime))
+		begin
+			set @OperacaoComAusencia = '-'
+			set @SaldoComAusencia = cast(@HorasDiarias as datetime) - cast(@TotalDiario as datetime) - cast(@DecorridoAusencia as datetime)
+
+			update @ResumoPonto set OperacaoComAusencia = @OperacaoComAusencia, SaldoComAusencia = @SaldoComAusencia
+			where Id = @Id
 		end
 		else
 		begin
-			set @SaldoDiarioBanco = @Saldo
+			set @OperacaoComAusencia = ''
+			set @SaldoComAusencia = '00:00'
+		end
+	end
+
+
+	/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+	/* calculando os saldos acumulados para banco e a receber CONSIDERANDO a ausência                                                                                                 */
+	/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+	if (@OperacaoComAusencia = '+')
+	begin
+		if (@SaldoComAusencia > @LimiteHorasDiarias)
+		begin
+			set @SaldoDiarioBanco = @LimiteHorasDiarias
+			set @SaldoDiarioReceber = cast(@SaldoComAusencia as datetime) - cast(@LimiteHorasDiarias as datetime)
+		end
+		else
+		begin
+			set @SaldoDiarioBanco = @SaldoComAusencia
 			set @SaldoDiarioReceber = '00:00'
 		end
 
@@ -146,17 +216,17 @@ begin
 		update @ResumoPonto set SaldoAcumBanco = @SaldoAcumBanco, SaldoAcumReceber = @SaldoAcumReceber
 		where Id = @Id
 	end
-	else if (@Operacao = '-')
+	else if (@OperacaoComAusencia = '-')
 	begin
-		set @SaldoDiarioBanco = @Saldo
+		set @SaldoDiarioBanco = @SaldoComAusencia
 
 		set @SaldoAcumBanco = cast(@SaldoAcumBanco as datetime) - cast(@SaldoDiarioBanco as datetime)
 
-		update @ResumoPonto set SaldoAcumBanco = @SaldoAcumBanco
+		update @ResumoPonto set SaldoAcumBanco = @SaldoAcumBanco, SaldoAcumReceber = @SaldoAcumReceber
 		where Id = @Id
 	end
 
-	fetch next from cursor_ResumoPonto into @Id, @TotalDiario
+	fetch next from cursor_ResumoPonto into @Id, @TotalDiario, @DecorridoAusencia
 end
 
 close cursor_ResumoPonto

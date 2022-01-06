@@ -1,6 +1,6 @@
 
-select * from [dbo].[APIUsuario]
+select * from [dbo].[APIUsuario] order by IdUsuario
 
-select * from [dbo].[APIPonto]
+select * from [dbo].[APIPonto] order by IdPonto
 
-select * from [dbo].[APIAusencia]
+select * from [dbo].[APIAusencia] order by IdAusencia
