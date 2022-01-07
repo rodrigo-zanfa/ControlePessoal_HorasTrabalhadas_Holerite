@@ -15,8 +15,6 @@ namespace ControlePessoal.Data.Maps
         {
             builder.ToTable("APIPonto");
 
-            builder.HasKey(x => x.IdPonto);
-
             builder.Property(x => x.IdPonto)
                 .ValueGeneratedOnAdd()
                 .UseIdentityColumn();
@@ -31,6 +29,8 @@ namespace ControlePessoal.Data.Maps
             builder.Property(x => x.DataHoraInclusao)
                 .IsRequired()
                 .HasColumnType("datetime");
+
+            builder.HasKey(x => x.IdPonto);
 
             builder.HasOne(x => x.Usuario)
                 .WithMany(x => x.Pontos)

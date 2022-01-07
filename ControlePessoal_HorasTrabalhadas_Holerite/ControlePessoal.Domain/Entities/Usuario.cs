@@ -22,6 +22,8 @@ namespace ControlePessoal.Domain.Entities
 
         public int IdUsuario { get; private set; }
         public string Nome { get; private set; }
+        public DateTime DataHoraInclusao { get; private set; }
+        public DateTime? DataHoraAlteracao { get; private set; }
 
         public virtual IEnumerable<Ponto> Pontos { get; private set; }
         public virtual IEnumerable<Ausencia> Ausencias { get; private set; }
@@ -29,6 +31,16 @@ namespace ControlePessoal.Domain.Entities
         public void UpdateNome(string nome)
         {
             Nome = nome;
+        }
+
+        public void UpdateDataHoraInclusao(DateTime dataHoraInclusao)
+        {
+            DataHoraInclusao = dataHoraInclusao;
+        }
+
+        public void UpdateDataHoraAlteracao(DateTime dataHoraAlteracao)
+        {
+            DataHoraAlteracao = dataHoraAlteracao;
         }
     }
 }

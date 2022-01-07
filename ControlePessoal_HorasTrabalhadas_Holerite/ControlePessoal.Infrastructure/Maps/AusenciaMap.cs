@@ -15,8 +15,6 @@ namespace ControlePessoal.Infrastructure.Maps
         {
             builder.ToTable("APIAusencia");
 
-            builder.HasKey(x => x.IdAusencia);
-
             builder.Property(x => x.IdAusencia)
                 .ValueGeneratedOnAdd()
                 .UseIdentityColumn();
@@ -43,6 +41,8 @@ namespace ControlePessoal.Infrastructure.Maps
             builder.Property(x => x.DataHoraAlteracao)
                 .IsRequired(false)
                 .HasColumnType("datetime");
+
+            builder.HasKey(x => x.IdAusencia);
 
             builder.HasOne(x => x.Usuario)
                 .WithMany(x => x.Ausencias)

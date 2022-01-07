@@ -15,8 +15,6 @@ namespace ControlePessoal.Infrastructure.Maps
         {
             builder.ToTable("APIUsuario");
 
-            builder.HasKey(x => x.IdUsuario);
-
             builder.Property(x => x.IdUsuario)
                 .ValueGeneratedOnAdd()
                 .UseIdentityColumn();
@@ -25,6 +23,16 @@ namespace ControlePessoal.Infrastructure.Maps
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(100);
+
+            builder.Property(x => x.DataHoraInclusao)
+                .IsRequired()
+                .HasColumnType("datetime");
+
+            builder.Property(x => x.DataHoraAlteracao)
+                .IsRequired(false)
+                .HasColumnType("datetime");
+
+            builder.HasKey(x => x.IdUsuario);
         }
     }
 }

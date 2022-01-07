@@ -18,23 +18,13 @@ CREATE TABLE [APIUsuario] (
 );
 GO
 
-INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20211221162312_01CreateDb', N'5.0.13');
-GO
-
-COMMIT;
-GO
-
-BEGIN TRANSACTION;
-GO
-
 CREATE TABLE [APIPonto] (
     [IdPonto] int NOT NULL IDENTITY,
     [IdUsuario] int NOT NULL,
     [DataPonto] date NOT NULL,
     [HoraPonto] time NOT NULL,
     [DataHoraInclusao] datetime NOT NULL,
-    [DataHoraAlteracao] datetime NOT NULL,
+    [DataHoraAlteracao] datetime NULL,
     CONSTRAINT [PK_APIPonto] PRIMARY KEY ([IdPonto]),
     CONSTRAINT [FK_APIPonto_APIUsuario_IdUsuario] FOREIGN KEY ([IdUsuario]) REFERENCES [APIUsuario] ([IdUsuario])
 );
@@ -44,7 +34,49 @@ CREATE INDEX [IX_APIPonto_IdUsuario] ON [APIPonto] ([IdUsuario]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20211222020027_02Ponto', N'5.0.13');
+VALUES (N'20211222025204_01CreateDb', N'5.0.13');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [APIAusencia] (
+    [IdAusencia] int NOT NULL IDENTITY,
+    [IdUsuario] int NOT NULL,
+    [DataAusencia] date NOT NULL,
+    [HoraInicialAusencia] time NOT NULL,
+    [HoraFinalAusencia] time NOT NULL,
+    [DataHoraInclusao] datetime NOT NULL,
+    [DataHoraAlteracao] datetime NULL,
+    CONSTRAINT [PK_APIAusencia] PRIMARY KEY ([IdAusencia]),
+    CONSTRAINT [FK_APIAusencia_APIUsuario_IdUsuario] FOREIGN KEY ([IdUsuario]) REFERENCES [APIUsuario] ([IdUsuario])
+);
+GO
+
+CREATE INDEX [IX_APIAusencia_IdUsuario] ON [APIAusencia] ([IdUsuario]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20211223020231_02Ausencia', N'5.0.13');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [APIUsuario] ADD [DataHoraAlteracao] datetime NULL;
+GO
+
+ALTER TABLE [APIUsuario] ADD [DataHoraInclusao] datetime NOT NULL DEFAULT '0001-01-01T00:00:00.000';
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220106235713_03Usuario', N'5.0.13');
 GO
 
 COMMIT;

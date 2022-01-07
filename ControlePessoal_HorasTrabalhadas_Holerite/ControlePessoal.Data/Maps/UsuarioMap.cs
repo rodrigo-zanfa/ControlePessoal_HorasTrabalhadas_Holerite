@@ -15,8 +15,6 @@ namespace ControlePessoal.Data.Maps
         {
             builder.ToTable("APIUsuario");
 
-            builder.HasKey(x => x.IdUsuario);
-
             builder.Property(x => x.IdUsuario)
                 .ValueGeneratedOnAdd()
                 .UseIdentityColumn();
@@ -25,6 +23,8 @@ namespace ControlePessoal.Data.Maps
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(100);
+
+            builder.HasKey(x => x.IdUsuario);
         }
     }
 }

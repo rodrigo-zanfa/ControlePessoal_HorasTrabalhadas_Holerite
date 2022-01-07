@@ -22,12 +22,16 @@ namespace ControlePessoal.Infrastructure.Repositories
 
         public void Create(Usuario entity)
         {
+            entity.UpdateDataHoraInclusao(DateTime.Now);
+
             _dataContext.Usuarios.Add(entity);
             _dataContext.SaveChanges();
         }
 
         public void Update(Usuario entity)
         {
+            entity.UpdateDataHoraAlteracao(DateTime.Now);
+
             _dataContext.Entry(entity).State = EntityState.Modified;
             _dataContext.SaveChanges();
         }
