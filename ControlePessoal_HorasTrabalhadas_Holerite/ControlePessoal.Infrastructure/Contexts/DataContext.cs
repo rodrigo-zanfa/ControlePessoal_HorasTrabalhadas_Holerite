@@ -21,6 +21,7 @@ namespace ControlePessoal.Infrastructure.Contexts
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Ponto> Pontos { get; set; }
         public DbSet<Ausencia> Ausencias { get; set; }
+        public DbSet<Salario> Salarios { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -35,10 +36,12 @@ namespace ControlePessoal.Infrastructure.Contexts
             modelBuilder.Ignore<Usuario>();  // se somente este, erro ao gerar (The entity type 'Notification' requires a primary key to be defined.); se Notification + Usuario, SUCESSO!
             modelBuilder.Ignore<Ponto>();
             modelBuilder.Ignore<Ausencia>();
+            modelBuilder.Ignore<Salario>();
 
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new PontoMap());
             modelBuilder.ApplyConfiguration(new AusenciaMap());
+            modelBuilder.ApplyConfiguration(new SalarioMap());
         }
     }
 }

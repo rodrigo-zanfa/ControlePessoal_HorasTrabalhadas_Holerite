@@ -82,3 +82,28 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [APISalario] (
+    [IdSalario] int NOT NULL IDENTITY,
+    [IdUsuario] int NOT NULL,
+    [DataVigenciaInicial] date NOT NULL,
+    [Valor] numeric(8,2) NOT NULL,
+    [DataHoraInclusao] datetime NOT NULL,
+    [DataHoraAlteracao] datetime NULL,
+    CONSTRAINT [PK_APISalario] PRIMARY KEY ([IdSalario]),
+    CONSTRAINT [FK_APISalario_APIUsuario_IdUsuario] FOREIGN KEY ([IdUsuario]) REFERENCES [APIUsuario] ([IdUsuario])
+);
+GO
+
+CREATE INDEX [IX_APISalario_IdUsuario] ON [APISalario] ([IdUsuario]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220111001442_04Salario', N'5.0.13');
+GO
+
+COMMIT;
+GO
+
