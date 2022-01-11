@@ -33,13 +33,13 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // gerar a Entidade
-            var ausencia = new Ausencia(command.IdUsuario, command.DataAusencia, command.HoraInicialAusencia, command.HoraFinalAusencia);
+            var entity = new Ausencia(command.IdUsuario, command.DataAusencia, command.HoraInicialAusencia, command.HoraFinalAusencia);
 
             // salvar
-            _repository.Create(ausencia);
+            _repository.Create(entity);
 
             // retornar o resultado
-            return new CommandResult(true, "Ausência criada com sucesso!", ausencia);
+            return new CommandResult(true, "Ausência criada com sucesso!", entity);
         }
 
         public ICommandResult Handle(UpdateAusenciaCommand command)
@@ -52,23 +52,23 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // recuperar a Entidade
-            var ausencia = _repository.GetById(command.IdAusencia);
-            if (ausencia == null)
+            var entity = _repository.GetById(command.IdAusencia);
+            if (entity == null)
             {
                 return new CommandResult(false, "Ausência não encontrada.", null);
             }
 
             // alterar os dados
-            ausencia.UpdateIdUsuario(command.IdUsuario);
-            ausencia.UpdateDataAusencia(command.DataAusencia);
-            ausencia.UpdateHoraInicialAusencia(command.HoraInicialAusencia);
-            ausencia.UpdateHoraFinalAusencia(command.HoraFinalAusencia);
+            entity.UpdateIdUsuario(command.IdUsuario);
+            entity.UpdateDataAusencia(command.DataAusencia);
+            entity.UpdateHoraInicialAusencia(command.HoraInicialAusencia);
+            entity.UpdateHoraFinalAusencia(command.HoraFinalAusencia);
 
             // salvar
-            _repository.Update(ausencia);
+            _repository.Update(entity);
 
             // retornar o resultado
-            return new CommandResult(true, "Ausência alterada com sucesso!", ausencia);
+            return new CommandResult(true, "Ausência alterada com sucesso!", entity);
         }
     }
 }

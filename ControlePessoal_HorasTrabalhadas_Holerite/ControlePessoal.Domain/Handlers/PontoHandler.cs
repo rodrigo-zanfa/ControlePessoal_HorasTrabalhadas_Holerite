@@ -34,13 +34,13 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // gerar a Entidade
-            var ponto = new Ponto(command.IdUsuario, command.DataPonto, command.HoraPonto);
+            var entity = new Ponto(command.IdUsuario, command.DataPonto, command.HoraPonto);
 
             // salvar
-            _repository.Create(ponto);
+            _repository.Create(entity);
 
             // retornar o resultado
-            return new CommandResult(true, "Ponto criado com sucesso!", ponto);
+            return new CommandResult(true, "Ponto criado com sucesso!", entity);
         }
 
         public ICommandResult Handle(UpdatePontoCommand command)
@@ -53,22 +53,22 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // recuperar a Entidade
-            var ponto = _repository.GetById(command.IdPonto);
-            if (ponto == null)
+            var entity = _repository.GetById(command.IdPonto);
+            if (entity == null)
             {
                 return new CommandResult(false, "Ponto não encontrado.", null);
             }
 
             // alterar os dados
-            ponto.UpdateIdUsuario(command.IdUsuario);
-            ponto.UpdateDataPonto(command.DataPonto);
-            ponto.UpdateHoraPonto(command.HoraPonto);
+            entity.UpdateIdUsuario(command.IdUsuario);
+            entity.UpdateDataPonto(command.DataPonto);
+            entity.UpdateHoraPonto(command.HoraPonto);
 
             // salvar
-            _repository.Update(ponto);
+            _repository.Update(entity);
 
             // retornar o resultado
-            return new CommandResult(true, "Ponto alterado com sucesso!", ponto);
+            return new CommandResult(true, "Ponto alterado com sucesso!", entity);
         }
 
         public ICommandResult Handle(CreateListPontosCommand command)
@@ -83,10 +83,10 @@ namespace ControlePessoal.Domain.Handlers
             foreach (var item in command.Pontos)
             {
                 // gerar a Entidade
-                var ponto = new Ponto(command.IdUsuario, item.DataPonto, item.HoraPonto);
+                var entity = new Ponto(command.IdUsuario, item.DataPonto, item.HoraPonto);
 
                 // salvar
-                _repository.Create(ponto);
+                _repository.Create(entity);
             }
 
             // retornar o resultado

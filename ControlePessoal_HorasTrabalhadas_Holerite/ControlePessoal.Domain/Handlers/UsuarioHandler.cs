@@ -33,13 +33,13 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // gerar a Entidade
-            var usuario = new Usuario(command.Nome);
+            var entity = new Usuario(command.Nome);
 
             // salvar
-            _repository.Create(usuario);
+            _repository.Create(entity);
 
             // retornar o resultado
-            return new CommandResult(true, "Usuário criado com sucesso!", usuario);
+            return new CommandResult(true, "Usuário criado com sucesso!", entity);
         }
 
         public ICommandResult Handle(UpdateUsuarioCommand command)
@@ -52,20 +52,20 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // recuperar a Entidade
-            var usuario = _repository.GetById(command.IdUsuario);
-            if (usuario == null)
+            var entity = _repository.GetById(command.IdUsuario);
+            if (entity == null)
             {
                 return new CommandResult(false, "Usuário não encontrado.", null);
             }
 
             // alterar os dados
-            usuario.UpdateNome(command.Nome);
+            entity.UpdateNome(command.Nome);
 
             // salvar
-            _repository.Update(usuario);
+            _repository.Update(entity);
 
             // retornar o resultado
-            return new CommandResult(true, "Usuário alterado com sucesso!", usuario);
+            return new CommandResult(true, "Usuário alterado com sucesso!", entity);
         }
     }
 }

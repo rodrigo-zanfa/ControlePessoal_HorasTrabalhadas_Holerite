@@ -22,12 +22,12 @@ namespace ControlePessoal.Domain.Tests.Repositories
             }
         }
 
-        public void Create(Usuario usuario)
+        public void Create(Usuario entity)
         {
 
         }
 
-        public void Update(Usuario usuario)
+        public void Update(Usuario entity)
         {
 
         }
