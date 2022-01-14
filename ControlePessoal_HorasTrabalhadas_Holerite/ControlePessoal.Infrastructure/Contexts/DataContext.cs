@@ -26,6 +26,9 @@ namespace ControlePessoal.Infrastructure.Contexts
         public DbSet<ParametroTipoDado> ParametrosTiposDados { get; set; }
         public DbSet<Parametro> Parametros { get; set; }
         public DbSet<ParametroUsuario> ParametrosUsuarios { get; set; }
+        public DbSet<TabelaTipo> TabelasTipos { get; set; }
+        public DbSet<Tabela> Tabelas { get; set; }
+        public DbSet<TabelaItem> TabelasItens { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -45,6 +48,9 @@ namespace ControlePessoal.Infrastructure.Contexts
             modelBuilder.Ignore<ParametroTipoDado>();
             modelBuilder.Ignore<Parametro>();
             modelBuilder.Ignore<ParametroUsuario>();
+            modelBuilder.Ignore<TabelaTipo>();
+            modelBuilder.Ignore<Tabela>();
+            modelBuilder.Ignore<TabelaItem>();
 
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new PontoMap());
@@ -54,6 +60,9 @@ namespace ControlePessoal.Infrastructure.Contexts
             modelBuilder.ApplyConfiguration(new ParametroTipoDadoMap());
             modelBuilder.ApplyConfiguration(new ParametroMap());
             modelBuilder.ApplyConfiguration(new ParametroUsuarioMap());
+            modelBuilder.ApplyConfiguration(new TabelaTipoMap());
+            modelBuilder.ApplyConfiguration(new TabelaMap());
+            modelBuilder.ApplyConfiguration(new TabelaItemMap());
         }
     }
 }

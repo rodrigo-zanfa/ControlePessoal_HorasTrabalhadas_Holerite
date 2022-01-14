@@ -19,12 +19,12 @@ namespace ControlePessoal.Infrastructure.Maps
                 .ValueGeneratedOnAdd()
                 .UseIdentityColumn();
 
-            builder.Property(x => x.Nome)
+            builder.Property(x => x.Descricao)
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(100);
 
-            builder.Property(x => x.Descricao)
+            builder.Property(x => x.DescricaoDetalhada)
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(300);
@@ -49,15 +49,15 @@ namespace ControlePessoal.Infrastructure.Maps
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasData(
-                new Parametro(idParametro: 1, nome: "Horário de Entrada", descricao: "Horário de Entrada do Usuário", idParametroTipoDado: 4),
-                new Parametro(idParametro: 2, nome: "Horário de Saída", descricao: "Horário de Saída do Usuário", idParametroTipoDado: 4),
-                new Parametro(idParametro: 3, nome: "Intervalo Diário", descricao: "Intervalo Diário do Usuário entre períodos de trabalho", idParametroTipoDado: 4),
-                new Parametro(idParametro: 4, nome: "Tolerância Diária", descricao: "Tolerância Diária (em hh:mm) para desconsiderar cálculos de Hora Extra ou Desconto", idParametroTipoDado: 4),
-                new Parametro(idParametro: 5, nome: "Limite para Banco de Horas Diário", descricao: "Limite (em hh:mm) para considerar o que fica em Banco de Horas; o excedente será considerado para pagamento em folha mensal", idParametroTipoDado: 4)/*,
-                new Parametro(idParametro: , nome: "", descricao: "", idParametroTipoDado: ),
-                new Parametro(idParametro: , nome: "", descricao: "", idParametroTipoDado: ),
-                new Parametro(idParametro: , nome: "", descricao: "", idParametroTipoDado: ),
-                new Parametro(idParametro: , nome: "", descricao: "", idParametroTipoDado: )*/
+                new Parametro(idParametro: 1, descricao: "Horário de Entrada", descricaoDetalhada: "Horário de Entrada do Usuário", idParametroTipoDado: 4),
+                new Parametro(idParametro: 2, descricao: "Horário de Saída", descricaoDetalhada: "Horário de Saída do Usuário", idParametroTipoDado: 4),
+                new Parametro(idParametro: 3, descricao: "Intervalo Diário", descricaoDetalhada: "Intervalo Diário do Usuário entre períodos de trabalho", idParametroTipoDado: 4),
+                new Parametro(idParametro: 4, descricao: "Tolerância Diária", descricaoDetalhada: "Tolerância Diária (em hh:mm) para desconsiderar cálculos de Hora Extra ou Desconto", idParametroTipoDado: 4),
+                new Parametro(idParametro: 5, descricao: "Limite para Banco de Horas Diário", descricaoDetalhada: "Limite (em hh:mm) para considerar o que fica em Banco de Horas; o excedente será considerado para pagamento em folha mensal", idParametroTipoDado: 4)/*,
+                new Parametro(idParametro: , descricao: "", descricaoDetalhada: "", idParametroTipoDado: ),
+                new Parametro(idParametro: , descricao: "", descricaoDetalhada: "", idParametroTipoDado: ),
+                new Parametro(idParametro: , descricao: "", descricaoDetalhada: "", idParametroTipoDado: ),
+                new Parametro(idParametro: , descricao: "", descricaoDetalhada: "", idParametroTipoDado: )*/
                 );
         }
     }
