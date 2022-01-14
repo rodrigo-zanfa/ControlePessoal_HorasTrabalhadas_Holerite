@@ -1,10 +1,63 @@
 
-declare @DataInicial datetime = '2021-11-15'
-declare @DataFinal datetime = '2022-01-14'
+declare @DataInicial date = '2021-11-15'
+declare @DataFinal date = '2022-01-14'
 declare @IdUsuario int = 1
-declare @HorasDiarias time = '08:00'
-declare @Tolerancia time = '00:10'
-declare @LimiteHorasDiarias time = '02:00'
+
+declare @Valor varchar(30) = ''
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+/* retornando os parâmetros necessários                                                                                                                                           */
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+/* 01. Horário de Entrada                                                                                                                                                         */
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+exec dbo.RetornarParametroDoUsuario 1, @IdUsuario, @DataFinal, @Valor output
+print '@Valor = ' + @Valor
+
+declare @HorarioEntrada time = cast(@Valor as time)
+print '@HorarioEntrada = ' + cast(@HorarioEntrada as varchar)
+
+/* 02. Horário de Saída                                                                                                                                                           */
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+exec dbo.RetornarParametroDoUsuario 2, @IdUsuario, @DataFinal, @Valor output
+print '@Valor = ' + @Valor
+
+declare @HorarioSaida time = cast(@Valor as time)
+print '@HorarioSaida = ' + cast(@HorarioSaida as varchar)
+
+/* 03. Intervalo Diário                                                                                                                                                           */
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+exec dbo.RetornarParametroDoUsuario 3, @IdUsuario, @DataFinal, @Valor output
+print '@Valor = ' + @Valor
+
+declare @IntervaloDiario time = cast(@Valor as time)
+print '@IntervaloDiario = ' + cast(@IntervaloDiario as varchar)
+
+declare @HorasDiarias time = cast(@HorarioSaida as datetime) - cast(@HorarioEntrada as datetime) - cast(@IntervaloDiario as datetime)
+print '@HorasDiarias = ' + cast(@HorasDiarias as varchar)
+
+/* 04. Tolerância Diária                                                                                                                                                          */
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+exec dbo.RetornarParametroDoUsuario 4, @IdUsuario, @DataFinal, @Valor output
+print '@Valor = ' + @Valor
+
+declare @Tolerancia time = cast(@Valor as time)
+print '@Tolerancia = ' + cast(@Tolerancia as varchar)
+
+/* 05. Limite para Banco de Horas Diário                                                                                                                                          */
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+exec dbo.RetornarParametroDoUsuario 5, @IdUsuario, @DataFinal, @Valor output
+print '@Valor = ' + @Valor
+
+declare @LimiteHorasDiarias time = cast(@Valor as time)
+print '@LimiteHorasDiarias = ' + cast(@LimiteHorasDiarias as varchar)
+
 
 declare @ResumoPonto table (
 	Id int,

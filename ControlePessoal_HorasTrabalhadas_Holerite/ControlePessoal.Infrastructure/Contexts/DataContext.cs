@@ -23,6 +23,9 @@ namespace ControlePessoal.Infrastructure.Contexts
         public DbSet<Ausencia> Ausencias { get; set; }
         public DbSet<Salario> Salarios { get; set; }
         public DbSet<SalarioMinimo> SalariosMinimos { get; set; }
+        public DbSet<ParametroTipoDado> ParametrosTiposDados { get; set; }
+        public DbSet<Parametro> Parametros { get; set; }
+        public DbSet<ParametroUsuario> ParametrosUsuarios { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -39,12 +42,18 @@ namespace ControlePessoal.Infrastructure.Contexts
             modelBuilder.Ignore<Ausencia>();
             modelBuilder.Ignore<Salario>();
             modelBuilder.Ignore<SalarioMinimo>();
+            modelBuilder.Ignore<ParametroTipoDado>();
+            modelBuilder.Ignore<Parametro>();
+            modelBuilder.Ignore<ParametroUsuario>();
 
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new PontoMap());
             modelBuilder.ApplyConfiguration(new AusenciaMap());
             modelBuilder.ApplyConfiguration(new SalarioMap());
             modelBuilder.ApplyConfiguration(new SalarioMinimoMap());
+            modelBuilder.ApplyConfiguration(new ParametroTipoDadoMap());
+            modelBuilder.ApplyConfiguration(new ParametroMap());
+            modelBuilder.ApplyConfiguration(new ParametroUsuarioMap());
         }
     }
 }

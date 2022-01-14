@@ -166,3 +166,97 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [APIParametroTipoDado] (
+    [IdParametroTipoDado] int NOT NULL IDENTITY,
+    [Descricao] varchar(30) NOT NULL,
+    [TamanhoMin] int NOT NULL,
+    [TamanhoMax] int NOT NULL,
+    [Formato] varchar(30) NULL,
+    [IntervaloMin] numeric(8,2) NULL,
+    [IntervaloMax] numeric(8,2) NULL,
+    [DataHoraInclusao] datetime NOT NULL DEFAULT (getdate()),
+    [DataHoraAlteracao] datetime NULL,
+    CONSTRAINT [PK_APIParametroTipoDado] PRIMARY KEY ([IdParametroTipoDado])
+);
+GO
+
+CREATE TABLE [APIParametro] (
+    [IdParametro] int NOT NULL IDENTITY,
+    [Nome] varchar(100) NOT NULL,
+    [Descricao] varchar(300) NOT NULL,
+    [IdParametroTipoDado] int NOT NULL,
+    [DataHoraInclusao] datetime NOT NULL DEFAULT (getdate()),
+    [DataHoraAlteracao] datetime NULL,
+    CONSTRAINT [PK_APIParametro] PRIMARY KEY ([IdParametro]),
+    CONSTRAINT [FK_APIParametro_APIParametroTipoDado_IdParametroTipoDado] FOREIGN KEY ([IdParametroTipoDado]) REFERENCES [APIParametroTipoDado] ([IdParametroTipoDado])
+);
+GO
+
+CREATE TABLE [APIParametroUsuario] (
+    [IdParametroUsuario] int NOT NULL IDENTITY,
+    [IdParametro] int NOT NULL,
+    [IdUsuario] int NOT NULL,
+    [DataVigenciaInicial] date NOT NULL,
+    [Valor] varchar(30) NOT NULL,
+    [DataHoraInclusao] datetime NOT NULL DEFAULT (getdate()),
+    [DataHoraAlteracao] datetime NULL,
+    CONSTRAINT [PK_APIParametroUsuario] PRIMARY KEY ([IdParametroUsuario]),
+    CONSTRAINT [FK_APIParametroUsuario_APIParametro_IdParametro] FOREIGN KEY ([IdParametro]) REFERENCES [APIParametro] ([IdParametro]),
+    CONSTRAINT [FK_APIParametroUsuario_APIUsuario_IdUsuario] FOREIGN KEY ([IdUsuario]) REFERENCES [APIUsuario] ([IdUsuario])
+);
+GO
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametroTipoDado', N'DataHoraAlteracao', N'Descricao', N'Formato', N'IntervaloMax', N'IntervaloMin', N'TamanhoMax', N'TamanhoMin') AND [object_id] = OBJECT_ID(N'[APIParametroTipoDado]'))
+    SET IDENTITY_INSERT [APIParametroTipoDado] ON;
+INSERT INTO [APIParametroTipoDado] ([IdParametroTipoDado], [DataHoraAlteracao], [Descricao], [Formato], [IntervaloMax], [IntervaloMin], [TamanhoMax], [TamanhoMin])
+VALUES (1, NULL, 'Monetário', '', NULL, NULL, 9, 1),
+(2, NULL, 'Percentual', '', 100.0, 0.0, 6, 1),
+(3, NULL, 'Data', 'dd/MM/yyyy', NULL, NULL, 10, 10),
+(4, NULL, 'Hora', 'hh:mm', NULL, NULL, 5, 5);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametroTipoDado', N'DataHoraAlteracao', N'Descricao', N'Formato', N'IntervaloMax', N'IntervaloMin', N'TamanhoMax', N'TamanhoMin') AND [object_id] = OBJECT_ID(N'[APIParametroTipoDado]'))
+    SET IDENTITY_INSERT [APIParametroTipoDado] OFF;
+GO
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametro', N'DataHoraAlteracao', N'Descricao', N'IdParametroTipoDado', N'Nome') AND [object_id] = OBJECT_ID(N'[APIParametro]'))
+    SET IDENTITY_INSERT [APIParametro] ON;
+INSERT INTO [APIParametro] ([IdParametro], [DataHoraAlteracao], [Descricao], [IdParametroTipoDado], [Nome])
+VALUES (1, NULL, 'Horário de Entrada do Usuário', 4, 'Horário de Entrada'),
+(2, NULL, 'Horário de Saída do Usuário', 4, 'Horário de Saída'),
+(3, NULL, 'Intervalo Diário do Usuário entre períodos de trabalho', 4, 'Intervalo Diário'),
+(4, NULL, 'Tolerância Diária (em hh:mm) para desconsiderar cálculos de Hora Extra ou Desconto', 4, 'Tolerância Diária'),
+(5, NULL, 'Limite (em hh:mm) para considerar o que fica em Banco de Horas; o excedente será considerado para pagamento em folha mensal', 4, 'Limite para Banco de Horas Diário');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametro', N'DataHoraAlteracao', N'Descricao', N'IdParametroTipoDado', N'Nome') AND [object_id] = OBJECT_ID(N'[APIParametro]'))
+    SET IDENTITY_INSERT [APIParametro] OFF;
+GO
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametroUsuario', N'DataHoraAlteracao', N'DataVigenciaInicial', N'IdParametro', N'IdUsuario', N'Valor') AND [object_id] = OBJECT_ID(N'[APIParametroUsuario]'))
+    SET IDENTITY_INSERT [APIParametroUsuario] ON;
+INSERT INTO [APIParametroUsuario] ([IdParametroUsuario], [DataHoraAlteracao], [DataVigenciaInicial], [IdParametro], [IdUsuario], [Valor])
+VALUES (1, NULL, '2021-01-01', 1, 1, '09:00'),
+(2, NULL, '2021-01-01', 2, 1, '18:00'),
+(3, NULL, '2021-01-01', 3, 1, '01:00'),
+(4, NULL, '2021-01-01', 4, 1, '00:10'),
+(5, NULL, '2021-01-01', 5, 1, '02:00');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametroUsuario', N'DataHoraAlteracao', N'DataVigenciaInicial', N'IdParametro', N'IdUsuario', N'Valor') AND [object_id] = OBJECT_ID(N'[APIParametroUsuario]'))
+    SET IDENTITY_INSERT [APIParametroUsuario] OFF;
+GO
+
+CREATE INDEX [IX_APIParametro_IdParametroTipoDado] ON [APIParametro] ([IdParametroTipoDado]);
+GO
+
+CREATE INDEX [IX_APIParametroUsuario_IdParametro] ON [APIParametroUsuario] ([IdParametro]);
+GO
+
+CREATE INDEX [IX_APIParametroUsuario_IdUsuario] ON [APIParametroUsuario] ([IdUsuario]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220113153509_06Parametros', N'5.0.13');
+GO
+
+COMMIT;
+GO
+
