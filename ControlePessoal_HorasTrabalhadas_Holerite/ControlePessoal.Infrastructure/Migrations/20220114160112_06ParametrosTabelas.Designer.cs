@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControlePessoal.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220114043045_06ParametrosTabelas")]
+    [Migration("20220114160112_06ParametrosTabelas")]
     partial class _06ParametrosTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -648,6 +648,9 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<int>("IdTabelaTipo")
                         .HasColumnType("int");
 
+                    b.Property<decimal?>("ValorDeducaoDependente")
+                        .HasColumnType("numeric(8,2)");
+
                     b.HasKey("IdTabela");
 
                     b.HasIndex("IdTabelaTipo");
@@ -1046,6 +1049,222 @@ namespace ControlePessoal.Infrastructure.Migrations
                             DataVigenciaInicial = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Descricao = "INSS a partir de 01/2022",
                             IdTabelaTipo = 1
+                        },
+                        new
+                        {
+                            IdTabela = 50,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1994, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 07/1994 a 07/1994",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 22.47m
+                        },
+                        new
+                        {
+                            IdTabela = 51,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1994, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 08/1994 a 08/1994",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 23.64m
+                        },
+                        new
+                        {
+                            IdTabela = 52,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1994, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 09/1994 a 09/1994",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 62.07m
+                        },
+                        new
+                        {
+                            IdTabela = 53,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1994, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 10/1994 a 10/1994",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 63.08m
+                        },
+                        new
+                        {
+                            IdTabela = 54,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1994, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 11/1994 a 11/1994",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 64.28m
+                        },
+                        new
+                        {
+                            IdTabela = 55,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1994, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 12/1994 a 12/1994",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 66.18m
+                        },
+                        new
+                        {
+                            IdTabela = 56,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1995, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/1995 a 03/1995",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 67.67m
+                        },
+                        new
+                        {
+                            IdTabela = 57,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1995, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 04/1995 a 06/1995",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 70.61m
+                        },
+                        new
+                        {
+                            IdTabela = 58,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1995, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 07/1995 a 09/1995",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 75.64m
+                        },
+                        new
+                        {
+                            IdTabela = 59,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1995, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 10/1995 a 12/1995",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 79.52m
+                        },
+                        new
+                        {
+                            IdTabela = 60,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1996, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/1996 a 12/1997",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 90m
+                        },
+                        new
+                        {
+                            IdTabela = 61,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(1998, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/1998 a 12/2001",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 90m
+                        },
+                        new
+                        {
+                            IdTabela = 62,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2002, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2002 a 12/2004",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 106m
+                        },
+                        new
+                        {
+                            IdTabela = 63,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2005, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2005 a 01/2006",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 117m
+                        },
+                        new
+                        {
+                            IdTabela = 64,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2006, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 02/2006 a 12/2006",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 126.36m
+                        },
+                        new
+                        {
+                            IdTabela = 65,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2007, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2007 a 12/2007",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 132.05m
+                        },
+                        new
+                        {
+                            IdTabela = 66,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2008, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2008 a 12/2008",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 137.99m
+                        },
+                        new
+                        {
+                            IdTabela = 67,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2009, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2009 a 12/2009",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 144.2m
+                        },
+                        new
+                        {
+                            IdTabela = 68,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2010, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2010 a 03/2011",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 150.69m
+                        },
+                        new
+                        {
+                            IdTabela = 69,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2011, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 04/2011 a 12/2011",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 157.47m
+                        },
+                        new
+                        {
+                            IdTabela = 70,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2012, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2012 a 12/2012",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 164.56m
+                        },
+                        new
+                        {
+                            IdTabela = 71,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2013, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2013 a 12/2013",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 171.97m
+                        },
+                        new
+                        {
+                            IdTabela = 72,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2014, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 01/2014 a 03/2015",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 179.71m
+                        },
+                        new
+                        {
+                            IdTabela = 73,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataVigenciaInicial = new DateTime(2015, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Tabela de IRRF de 04/2015 a 01/2022",
+                            IdTabelaTipo = 2,
+                            ValorDeducaoDependente = 189.59m
                         });
                 });
 
@@ -1075,7 +1294,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<decimal>("IntervaloInicial")
                         .HasColumnType("numeric(8,2)");
 
-                    b.Property<decimal>("Valor")
+                    b.Property<decimal>("ValorAliquota")
+                        .HasColumnType("numeric(8,2)");
+
+                    b.Property<decimal?>("ValorDeducao")
                         .HasColumnType("numeric(8,2)");
 
                     b.HasKey("IdTabelaItem");
@@ -1092,7 +1314,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 1,
                             IntervaloFinal = 174.86m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -1101,7 +1323,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 1,
                             IntervaloFinal = 291.43m,
                             IntervaloInicial = 174.87m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1110,7 +1332,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 1,
                             IntervaloFinal = 582.86m,
                             IntervaloInicial = 291.44m,
-                            Valor = 10m
+                            ValorAliquota = 10m
                         },
                         new
                         {
@@ -1119,7 +1341,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 2,
                             IntervaloFinal = 249.8m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -1128,7 +1350,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 2,
                             IntervaloFinal = 416.33m,
                             IntervaloInicial = 249.81m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1137,7 +1359,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 2,
                             IntervaloFinal = 832.66m,
                             IntervaloInicial = 416.34m,
-                            Valor = 10m
+                            ValorAliquota = 10m
                         },
                         new
                         {
@@ -1146,7 +1368,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 3,
                             IntervaloFinal = 249.8m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -1155,7 +1377,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 3,
                             IntervaloFinal = 416.33m,
                             IntervaloInicial = 249.81m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1164,7 +1386,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 3,
                             IntervaloFinal = 832.66m,
                             IntervaloInicial = 416.34m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1173,7 +1395,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 4,
                             IntervaloFinal = 287.27m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -1182,7 +1404,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 4,
                             IntervaloFinal = 478.78m,
                             IntervaloInicial = 287.28m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1191,7 +1413,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 4,
                             IntervaloFinal = 957.56m,
                             IntervaloInicial = 478.79m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1200,7 +1422,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 5,
                             IntervaloFinal = 287.27m,
                             IntervaloInicial = 0m,
-                            Valor = 7.82m
+                            ValorAliquota = 7.82m
                         },
                         new
                         {
@@ -1209,7 +1431,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 5,
                             IntervaloFinal = 336m,
                             IntervaloInicial = 287.28m,
-                            Valor = 8.82m
+                            ValorAliquota = 8.82m
                         },
                         new
                         {
@@ -1218,7 +1440,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 5,
                             IntervaloFinal = 478.78m,
                             IntervaloInicial = 336.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1227,7 +1449,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 5,
                             IntervaloFinal = 957.56m,
                             IntervaloInicial = 478.79m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1236,7 +1458,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 6,
                             IntervaloFinal = 287.27m,
                             IntervaloInicial = 0m,
-                            Valor = 7.82m
+                            ValorAliquota = 7.82m
                         },
                         new
                         {
@@ -1245,7 +1467,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 6,
                             IntervaloFinal = 360m,
                             IntervaloInicial = 287.28m,
-                            Valor = 8.82m
+                            ValorAliquota = 8.82m
                         },
                         new
                         {
@@ -1254,7 +1476,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 6,
                             IntervaloFinal = 478.78m,
                             IntervaloInicial = 360.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1263,7 +1485,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 6,
                             IntervaloFinal = 957.56m,
                             IntervaloInicial = 478.79m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1272,7 +1494,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 7,
                             IntervaloFinal = 309.56m,
                             IntervaloInicial = 0m,
-                            Valor = 7.82m
+                            ValorAliquota = 7.82m
                         },
                         new
                         {
@@ -1281,7 +1503,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 7,
                             IntervaloFinal = 360m,
                             IntervaloInicial = 309.57m,
-                            Valor = 8.82m
+                            ValorAliquota = 8.82m
                         },
                         new
                         {
@@ -1290,7 +1512,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 7,
                             IntervaloFinal = 515.93m,
                             IntervaloInicial = 360.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1299,7 +1521,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 7,
                             IntervaloFinal = 1031.87m,
                             IntervaloInicial = 515.94m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1308,7 +1530,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 8,
                             IntervaloFinal = 309.56m,
                             IntervaloInicial = 0m,
-                            Valor = 7.82m
+                            ValorAliquota = 7.82m
                         },
                         new
                         {
@@ -1317,7 +1539,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 8,
                             IntervaloFinal = 390m,
                             IntervaloInicial = 309.57m,
-                            Valor = 8.82m
+                            ValorAliquota = 8.82m
                         },
                         new
                         {
@@ -1326,7 +1548,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 8,
                             IntervaloFinal = 515.93m,
                             IntervaloInicial = 390.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1335,7 +1557,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 8,
                             IntervaloFinal = 1031.87m,
                             IntervaloInicial = 515.94m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1344,7 +1566,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 9,
                             IntervaloFinal = 324.45m,
                             IntervaloInicial = 0m,
-                            Valor = 7.82m
+                            ValorAliquota = 7.82m
                         },
                         new
                         {
@@ -1353,7 +1575,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 9,
                             IntervaloFinal = 390m,
                             IntervaloInicial = 324.46m,
-                            Valor = 8.82m
+                            ValorAliquota = 8.82m
                         },
                         new
                         {
@@ -1362,7 +1584,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 9,
                             IntervaloFinal = 540.75m,
                             IntervaloInicial = 390.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1371,7 +1593,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 9,
                             IntervaloFinal = 1081.5m,
                             IntervaloInicial = 540.76m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1380,7 +1602,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 10,
                             IntervaloFinal = 360m,
                             IntervaloInicial = 0m,
-                            Valor = 7.82m
+                            ValorAliquota = 7.82m
                         },
                         new
                         {
@@ -1389,7 +1611,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 10,
                             IntervaloFinal = 390m,
                             IntervaloInicial = 360.01m,
-                            Valor = 8.82m
+                            ValorAliquota = 8.82m
                         },
                         new
                         {
@@ -1398,7 +1620,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 10,
                             IntervaloFinal = 600m,
                             IntervaloInicial = 390.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1407,7 +1629,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 10,
                             IntervaloFinal = 1200m,
                             IntervaloInicial = 600.01m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1416,7 +1638,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 11,
                             IntervaloFinal = 360m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -1425,7 +1647,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 11,
                             IntervaloFinal = 600m,
                             IntervaloInicial = 360.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1434,7 +1656,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 11,
                             IntervaloFinal = 1200m,
                             IntervaloInicial = 600.01m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1443,7 +1665,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 12,
                             IntervaloFinal = 376.6m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1452,7 +1674,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 12,
                             IntervaloFinal = 408m,
                             IntervaloInicial = 376.61m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1461,7 +1683,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 12,
                             IntervaloFinal = 627.66m,
                             IntervaloInicial = 408.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1470,7 +1692,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 12,
                             IntervaloFinal = 1255.32m,
                             IntervaloInicial = 627.67m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1479,7 +1701,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 13,
                             IntervaloFinal = 376.6m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1488,7 +1710,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 13,
                             IntervaloFinal = 408m,
                             IntervaloInicial = 376.61m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1497,7 +1719,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 13,
                             IntervaloFinal = 627.66m,
                             IntervaloInicial = 408.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1506,7 +1728,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 13,
                             IntervaloFinal = 1255.32m,
                             IntervaloInicial = 627.67m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1515,7 +1737,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 14,
                             IntervaloFinal = 376.6m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1524,7 +1746,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 14,
                             IntervaloFinal = 450m,
                             IntervaloInicial = 376.61m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1533,7 +1755,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 14,
                             IntervaloFinal = 627.66m,
                             IntervaloInicial = 450.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1542,7 +1764,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 14,
                             IntervaloFinal = 1255.32m,
                             IntervaloInicial = 627.67m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1551,7 +1773,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 15,
                             IntervaloFinal = 376.6m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1560,7 +1782,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 15,
                             IntervaloFinal = 453m,
                             IntervaloInicial = 376.61m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1569,7 +1791,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 15,
                             IntervaloFinal = 627.66m,
                             IntervaloInicial = 453.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1578,7 +1800,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 15,
                             IntervaloFinal = 1255.32m,
                             IntervaloInicial = 627.67m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1587,7 +1809,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 16,
                             IntervaloFinal = 398.48m,
                             IntervaloInicial = 0m,
-                            Valor = 7.72m
+                            ValorAliquota = 7.72m
                         },
                         new
                         {
@@ -1596,7 +1818,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 16,
                             IntervaloFinal = 453m,
                             IntervaloInicial = 398.49m,
-                            Valor = 8.73m
+                            ValorAliquota = 8.73m
                         },
                         new
                         {
@@ -1605,7 +1827,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 16,
                             IntervaloFinal = 664.13m,
                             IntervaloInicial = 453.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1614,7 +1836,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 16,
                             IntervaloFinal = 1328.25m,
                             IntervaloInicial = 664.14m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1623,7 +1845,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 17,
                             IntervaloFinal = 398.48m,
                             IntervaloInicial = 0m,
-                            Valor = 7.72m
+                            ValorAliquota = 7.72m
                         },
                         new
                         {
@@ -1632,7 +1854,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 17,
                             IntervaloFinal = 453m,
                             IntervaloInicial = 398.49m,
-                            Valor = 8.73m
+                            ValorAliquota = 8.73m
                         },
                         new
                         {
@@ -1641,7 +1863,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 17,
                             IntervaloFinal = 664.13m,
                             IntervaloInicial = 453.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1650,7 +1872,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 17,
                             IntervaloFinal = 1328.25m,
                             IntervaloInicial = 664.14m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1659,7 +1881,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 18,
                             IntervaloFinal = 398.48m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1668,7 +1890,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 18,
                             IntervaloFinal = 453m,
                             IntervaloInicial = 398.49m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1677,7 +1899,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 18,
                             IntervaloFinal = 664.13m,
                             IntervaloInicial = 453.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1686,7 +1908,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 18,
                             IntervaloFinal = 1328.25m,
                             IntervaloInicial = 664.14m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1695,7 +1917,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 19,
                             IntervaloFinal = 398.48m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1704,7 +1926,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 19,
                             IntervaloFinal = 540m,
                             IntervaloInicial = 398.49m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1713,7 +1935,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 19,
                             IntervaloFinal = 664.13m,
                             IntervaloInicial = 540.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1722,7 +1944,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 19,
                             IntervaloFinal = 1328.25m,
                             IntervaloInicial = 664.14m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1731,7 +1953,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 20,
                             IntervaloFinal = 429m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1740,7 +1962,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 20,
                             IntervaloFinal = 540m,
                             IntervaloInicial = 429.01m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1749,7 +1971,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 20,
                             IntervaloFinal = 715m,
                             IntervaloInicial = 540.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1758,7 +1980,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 20,
                             IntervaloFinal = 1430m,
                             IntervaloInicial = 715.01m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1767,7 +1989,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 21,
                             IntervaloFinal = 429m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1776,7 +1998,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 21,
                             IntervaloFinal = 600m,
                             IntervaloInicial = 429.01m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1785,7 +2007,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 21,
                             IntervaloFinal = 715m,
                             IntervaloInicial = 600.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1794,7 +2016,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 21,
                             IntervaloFinal = 1430m,
                             IntervaloInicial = 715.01m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1803,7 +2025,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 22,
                             IntervaloFinal = 468.47m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1812,7 +2034,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 22,
                             IntervaloFinal = 600m,
                             IntervaloInicial = 468.48m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1821,7 +2043,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 22,
                             IntervaloFinal = 780.78m,
                             IntervaloInicial = 600.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1830,7 +2052,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 22,
                             IntervaloFinal = 1561.56m,
                             IntervaloInicial = 780.79m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1839,7 +2061,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 23,
                             IntervaloFinal = 468.47m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1848,7 +2070,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 23,
                             IntervaloFinal = 720m,
                             IntervaloInicial = 468.48m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1857,7 +2079,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 23,
                             IntervaloFinal = 780.78m,
                             IntervaloInicial = 720.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1866,7 +2088,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 23,
                             IntervaloFinal = 1561.56m,
                             IntervaloInicial = 780.79m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1875,7 +2097,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 24,
                             IntervaloFinal = 560.81m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1884,7 +2106,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 24,
                             IntervaloFinal = 720m,
                             IntervaloInicial = 560.82m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1893,7 +2115,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 24,
                             IntervaloFinal = 934.67m,
                             IntervaloInicial = 720.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1902,7 +2124,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 24,
                             IntervaloFinal = 1869.34m,
                             IntervaloInicial = 934.68m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1911,7 +2133,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 25,
                             IntervaloFinal = 720m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1920,7 +2142,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 25,
                             IntervaloFinal = 1200m,
                             IntervaloInicial = 720.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1929,7 +2151,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 25,
                             IntervaloFinal = 2400m,
                             IntervaloInicial = 1200.01m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1938,7 +2160,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 26,
                             IntervaloFinal = 752.62m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1947,7 +2169,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 26,
                             IntervaloFinal = 780m,
                             IntervaloInicial = 752.63m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1956,7 +2178,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 26,
                             IntervaloFinal = 1254.36m,
                             IntervaloInicial = 780.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -1965,7 +2187,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 26,
                             IntervaloFinal = 2508.72m,
                             IntervaloInicial = 1254.37m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -1974,7 +2196,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 27,
                             IntervaloFinal = 800.45m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -1983,7 +2205,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 27,
                             IntervaloFinal = 900m,
                             IntervaloInicial = 800.46m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -1992,7 +2214,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 27,
                             IntervaloFinal = 1334.07m,
                             IntervaloInicial = 900.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2001,7 +2223,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 27,
                             IntervaloFinal = 2668.15m,
                             IntervaloInicial = 1334.08m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2010,7 +2232,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 28,
                             IntervaloFinal = 840.47m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -2019,7 +2241,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 28,
                             IntervaloFinal = 1050m,
                             IntervaloInicial = 840.48m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -2028,7 +2250,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 28,
                             IntervaloFinal = 1400.77m,
                             IntervaloInicial = 1050.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2037,7 +2259,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 28,
                             IntervaloFinal = 2801.56m,
                             IntervaloInicial = 1400.78m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2046,7 +2268,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 29,
                             IntervaloFinal = 840.55m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -2055,7 +2277,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 29,
                             IntervaloFinal = 1050m,
                             IntervaloInicial = 840.56m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -2064,7 +2286,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 29,
                             IntervaloFinal = 1400.91m,
                             IntervaloInicial = 1050.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2073,7 +2295,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 29,
                             IntervaloFinal = 2801.82m,
                             IntervaloInicial = 1400.92m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2082,7 +2304,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 30,
                             IntervaloFinal = 868.29m,
                             IntervaloInicial = 0m,
-                            Valor = 7.65m
+                            ValorAliquota = 7.65m
                         },
                         new
                         {
@@ -2091,7 +2313,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 30,
                             IntervaloFinal = 1140m,
                             IntervaloInicial = 868.3m,
-                            Valor = 8.65m
+                            ValorAliquota = 8.65m
                         },
                         new
                         {
@@ -2100,7 +2322,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 30,
                             IntervaloFinal = 1447.14m,
                             IntervaloInicial = 1140.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2109,7 +2331,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 30,
                             IntervaloFinal = 2894.28m,
                             IntervaloInicial = 1447.15m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2118,7 +2340,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 31,
                             IntervaloFinal = 868.29m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2127,7 +2349,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 31,
                             IntervaloFinal = 1447.14m,
                             IntervaloInicial = 868.3m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2136,7 +2358,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 31,
                             IntervaloFinal = 2894.28m,
                             IntervaloInicial = 1447.15m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2145,7 +2367,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 32,
                             IntervaloFinal = 911.7m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2154,7 +2376,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 32,
                             IntervaloFinal = 1519.5m,
                             IntervaloInicial = 911.71m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2163,7 +2385,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 32,
                             IntervaloFinal = 3038.99m,
                             IntervaloInicial = 1519.51m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2172,7 +2394,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 33,
                             IntervaloFinal = 965.67m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2181,7 +2403,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 33,
                             IntervaloFinal = 1609.45m,
                             IntervaloInicial = 965.68m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2190,7 +2412,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 33,
                             IntervaloFinal = 3218.9m,
                             IntervaloInicial = 1609.46m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2199,7 +2421,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 34,
                             IntervaloFinal = 1024.97m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2208,7 +2430,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 34,
                             IntervaloFinal = 1708.27m,
                             IntervaloInicial = 1024.98m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2217,7 +2439,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 34,
                             IntervaloFinal = 3416.24m,
                             IntervaloInicial = 1708.28m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2226,7 +2448,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 35,
                             IntervaloFinal = 1040.22m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2235,7 +2457,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 35,
                             IntervaloFinal = 1733.7m,
                             IntervaloInicial = 1040.23m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2244,7 +2466,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 35,
                             IntervaloFinal = 3467.4m,
                             IntervaloInicial = 1733.71m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2253,7 +2475,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 36,
                             IntervaloFinal = 1106.9m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2262,7 +2484,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 36,
                             IntervaloFinal = 1844.83m,
                             IntervaloInicial = 1106.91m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2271,7 +2493,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 36,
                             IntervaloFinal = 3689.66m,
                             IntervaloInicial = 1844.84m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2280,7 +2502,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 37,
                             IntervaloFinal = 1107.52m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2289,7 +2511,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 37,
                             IntervaloFinal = 1845.87m,
                             IntervaloInicial = 1107.53m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2298,7 +2520,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 37,
                             IntervaloFinal = 3691.74m,
                             IntervaloInicial = 1845.88m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2307,7 +2529,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 38,
                             IntervaloFinal = 1174.86m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2316,7 +2538,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 38,
                             IntervaloFinal = 1958.1m,
                             IntervaloInicial = 1174.87m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2325,7 +2547,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 38,
                             IntervaloFinal = 3916.2m,
                             IntervaloInicial = 1958.11m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2334,7 +2556,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 39,
                             IntervaloFinal = 1247.7m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2343,7 +2565,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 39,
                             IntervaloFinal = 2079.5m,
                             IntervaloInicial = 1247.71m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2352,7 +2574,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 39,
                             IntervaloFinal = 4159m,
                             IntervaloInicial = 2079.51m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2361,7 +2583,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 40,
                             IntervaloFinal = 1317.07m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2370,7 +2592,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 40,
                             IntervaloFinal = 2195.12m,
                             IntervaloInicial = 1317.08m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2379,7 +2601,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 40,
                             IntervaloFinal = 4390.24m,
                             IntervaloInicial = 2195.13m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2388,7 +2610,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 41,
                             IntervaloFinal = 1399.12m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2397,7 +2619,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 41,
                             IntervaloFinal = 2331.88m,
                             IntervaloInicial = 1399.13m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2406,7 +2628,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 41,
                             IntervaloFinal = 4663.75m,
                             IntervaloInicial = 2331.89m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2415,7 +2637,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 42,
                             IntervaloFinal = 1556.94m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2424,7 +2646,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 42,
                             IntervaloFinal = 2594.92m,
                             IntervaloInicial = 1556.95m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2433,7 +2655,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 42,
                             IntervaloFinal = 5189.82m,
                             IntervaloInicial = 2594.93m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2442,7 +2664,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 43,
                             IntervaloFinal = 1659.38m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2451,7 +2673,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 43,
                             IntervaloFinal = 2765.66m,
                             IntervaloInicial = 1659.39m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2460,7 +2682,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 43,
                             IntervaloFinal = 5531.31m,
                             IntervaloInicial = 2765.67m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2469,7 +2691,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 44,
                             IntervaloFinal = 1693.72m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2478,7 +2700,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 44,
                             IntervaloFinal = 2822.9m,
                             IntervaloInicial = 1693.73m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2487,7 +2709,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 44,
                             IntervaloFinal = 5645.8m,
                             IntervaloInicial = 2822.91m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2496,7 +2718,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 45,
                             IntervaloFinal = 1751.81m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2505,7 +2727,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 45,
                             IntervaloFinal = 2919.72m,
                             IntervaloInicial = 1751.82m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2514,7 +2736,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 45,
                             IntervaloFinal = 5839.45m,
                             IntervaloInicial = 2919.73m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2523,7 +2745,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 46,
                             IntervaloFinal = 1830.29m,
                             IntervaloInicial = 0m,
-                            Valor = 8m
+                            ValorAliquota = 8m
                         },
                         new
                         {
@@ -2532,7 +2754,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 46,
                             IntervaloFinal = 3050.52m,
                             IntervaloInicial = 1830.3m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2541,7 +2763,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 46,
                             IntervaloFinal = 6101.06m,
                             IntervaloInicial = 3050.53m,
-                            Valor = 11m
+                            ValorAliquota = 11m
                         },
                         new
                         {
@@ -2550,7 +2772,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 47,
                             IntervaloFinal = 1045m,
                             IntervaloInicial = 0m,
-                            Valor = 7.5m
+                            ValorAliquota = 7.5m
                         },
                         new
                         {
@@ -2559,7 +2781,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 47,
                             IntervaloFinal = 2089.6m,
                             IntervaloInicial = 1045.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2568,7 +2790,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 47,
                             IntervaloFinal = 3134.4m,
                             IntervaloInicial = 2089.61m,
-                            Valor = 12m
+                            ValorAliquota = 12m
                         },
                         new
                         {
@@ -2577,7 +2799,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 47,
                             IntervaloFinal = 6101.06m,
                             IntervaloInicial = 3134.41m,
-                            Valor = 14m
+                            ValorAliquota = 14m
                         },
                         new
                         {
@@ -2586,7 +2808,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 48,
                             IntervaloFinal = 1100m,
                             IntervaloInicial = 0m,
-                            Valor = 7.5m
+                            ValorAliquota = 7.5m
                         },
                         new
                         {
@@ -2595,7 +2817,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 48,
                             IntervaloFinal = 2203.48m,
                             IntervaloInicial = 1100.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2604,7 +2826,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 48,
                             IntervaloFinal = 3305.22m,
                             IntervaloInicial = 2203.49m,
-                            Valor = 12m
+                            ValorAliquota = 12m
                         },
                         new
                         {
@@ -2613,7 +2835,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 48,
                             IntervaloFinal = 6433.57m,
                             IntervaloInicial = 3305.23m,
-                            Valor = 14m
+                            ValorAliquota = 14m
                         },
                         new
                         {
@@ -2622,7 +2844,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 49,
                             IntervaloFinal = 1212m,
                             IntervaloInicial = 0m,
-                            Valor = 7.5m
+                            ValorAliquota = 7.5m
                         },
                         new
                         {
@@ -2631,7 +2853,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 49,
                             IntervaloFinal = 2427.79m,
                             IntervaloInicial = 1212.01m,
-                            Valor = 9m
+                            ValorAliquota = 9m
                         },
                         new
                         {
@@ -2640,7 +2862,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 49,
                             IntervaloFinal = 3641.69m,
                             IntervaloInicial = 2427.8m,
-                            Valor = 12m
+                            ValorAliquota = 12m
                         },
                         new
                         {
@@ -2649,7 +2871,967 @@ namespace ControlePessoal.Infrastructure.Migrations
                             IdTabela = 49,
                             IntervaloFinal = 7088.5m,
                             IntervaloInicial = 3641.7m,
-                            Valor = 14m
+                            ValorAliquota = 14m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 175,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 50,
+                            IntervaloFinal = 561.8m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 176,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 50,
+                            IntervaloFinal = 1095.51m,
+                            IntervaloInicial = 561.81m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 84.27m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 177,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 50,
+                            IntervaloFinal = 10112.4m,
+                            IntervaloInicial = 1095.52m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 211.46m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 178,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 50,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 10112.41m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1060.82m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 179,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 51,
+                            IntervaloFinal = 591.1m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 180,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 51,
+                            IntervaloFinal = 1152.65m,
+                            IntervaloInicial = 591.11m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 88.66m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 181,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 51,
+                            IntervaloFinal = 10639.8m,
+                            IntervaloInicial = 1152.66m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 222.49m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 182,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 51,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 10639.81m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1116.14m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 183,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 52,
+                            IntervaloFinal = 620.71m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 184,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 52,
+                            IntervaloFinal = 1210.36m,
+                            IntervaloInicial = 620.72m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 93.1m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 185,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 52,
+                            IntervaloFinal = 11172.6m,
+                            IntervaloInicial = 1210.37m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 233.63m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 186,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 52,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 11172.61m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1172.04m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 187,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 53,
+                            IntervaloFinal = 630.8m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 188,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 53,
+                            IntervaloFinal = 1230.06m,
+                            IntervaloInicial = 630.81m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 94.62m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 189,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 53,
+                            IntervaloFinal = 11354.4m,
+                            IntervaloInicial = 1230.07m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 237.43m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 190,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 53,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 11354.41m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1191.11m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 191,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 54,
+                            IntervaloFinal = 642.8m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 192,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 54,
+                            IntervaloFinal = 1253.47m,
+                            IntervaloInicial = 642.81m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 96.42m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 193,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 54,
+                            IntervaloFinal = 11570.4m,
+                            IntervaloInicial = 1253.48m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 241.94m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 194,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 54,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 11570.41m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1213.77m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 195,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 55,
+                            IntervaloFinal = 661.8m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 196,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 55,
+                            IntervaloFinal = 1290.51m,
+                            IntervaloInicial = 661.81m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 99.27m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 197,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 55,
+                            IntervaloFinal = 11912.4m,
+                            IntervaloInicial = 1290.52m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 249.09m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 198,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 55,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 11912.41m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1249.64m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 199,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 56,
+                            IntervaloFinal = 676.7m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 200,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 56,
+                            IntervaloFinal = 1319.57m,
+                            IntervaloInicial = 676.71m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 101.51m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 201,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 56,
+                            IntervaloFinal = 12180.6m,
+                            IntervaloInicial = 1319.58m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 254.7m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 202,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 56,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 12180.61m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1277.78m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 203,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 57,
+                            IntervaloFinal = 706.1m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 204,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 57,
+                            IntervaloFinal = 1376.84m,
+                            IntervaloInicial = 706.11m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 105.91m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 205,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 57,
+                            IntervaloFinal = 12709.24m,
+                            IntervaloInicial = 1376.85m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 265.76m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 206,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 57,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 12709.25m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1333.23m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 207,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 58,
+                            IntervaloFinal = 756.44m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 208,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 58,
+                            IntervaloFinal = 1475.01m,
+                            IntervaloInicial = 756.45m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 103.47m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 209,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 58,
+                            IntervaloFinal = 13615.41m,
+                            IntervaloInicial = 1475.02m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 284.71m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 210,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 58,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 13615.42m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1428.29m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 211,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 59,
+                            IntervaloFinal = 795.24m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 212,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 59,
+                            IntervaloFinal = 1550.68m,
+                            IntervaloInicial = 795.25m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 119.29m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 213,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 59,
+                            IntervaloFinal = 14313.88m,
+                            IntervaloInicial = 1550.69m,
+                            ValorAliquota = 26.6m,
+                            ValorDeducao = 299.32m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 214,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 59,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 14313.89m,
+                            ValorAliquota = 35m,
+                            ValorDeducao = 1501.57m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 215,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 60,
+                            IntervaloFinal = 900m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 216,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 60,
+                            IntervaloFinal = 1800m,
+                            IntervaloInicial = 900.01m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 135m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 217,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 60,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 1800.01m,
+                            ValorAliquota = 25m,
+                            ValorDeducao = 315m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 218,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 61,
+                            IntervaloFinal = 900m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 219,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 61,
+                            IntervaloFinal = 1800m,
+                            IntervaloInicial = 900.01m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 135m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 220,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 61,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 1800.01m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 360m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 221,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 62,
+                            IntervaloFinal = 1058m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 222,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 62,
+                            IntervaloFinal = 2115m,
+                            IntervaloInicial = 1058.01m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 158.7m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 223,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 62,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 2115.01m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 423.08m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 224,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 63,
+                            IntervaloFinal = 1164m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 225,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 63,
+                            IntervaloFinal = 2326m,
+                            IntervaloInicial = 1164.01m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 174.6m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 226,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 63,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 2326.01m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 465.35m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 227,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 64,
+                            IntervaloFinal = 1257.12m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 228,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 64,
+                            IntervaloFinal = 2512.08m,
+                            IntervaloInicial = 1257.13m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 188.57m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 229,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 64,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 2512.09m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 502.58m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 230,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 65,
+                            IntervaloFinal = 1313.69m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 231,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 65,
+                            IntervaloFinal = 2625.12m,
+                            IntervaloInicial = 1313.7m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 197.05m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 232,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 65,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 2625.13m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 525.19m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 233,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 66,
+                            IntervaloFinal = 1372.81m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 234,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 66,
+                            IntervaloFinal = 2743.25m,
+                            IntervaloInicial = 1372.82m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 205.92m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 235,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 66,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 2743.26m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 548.82m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 236,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 67,
+                            IntervaloFinal = 1434.59m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 237,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 67,
+                            IntervaloFinal = 2150m,
+                            IntervaloInicial = 1434.6m,
+                            ValorAliquota = 7.5m,
+                            ValorDeducao = 107.59m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 238,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 67,
+                            IntervaloFinal = 2866.7m,
+                            IntervaloInicial = 2150.01m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 268.84m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 239,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 67,
+                            IntervaloFinal = 3582m,
+                            IntervaloInicial = 2866.71m,
+                            ValorAliquota = 22.5m,
+                            ValorDeducao = 483.84m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 240,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 67,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 3582.01m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 662.94m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 241,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 68,
+                            IntervaloFinal = 1499.15m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 242,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 68,
+                            IntervaloFinal = 2246.75m,
+                            IntervaloInicial = 1499.16m,
+                            ValorAliquota = 7.5m,
+                            ValorDeducao = 112.43m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 243,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 68,
+                            IntervaloFinal = 2995.7m,
+                            IntervaloInicial = 2246.76m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 280.94m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 244,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 68,
+                            IntervaloFinal = 3743.19m,
+                            IntervaloInicial = 2995.71m,
+                            ValorAliquota = 22.5m,
+                            ValorDeducao = 505.62m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 245,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 68,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 3743.2m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 692.78m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 246,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 69,
+                            IntervaloFinal = 1566.61m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 247,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 69,
+                            IntervaloFinal = 2347.85m,
+                            IntervaloInicial = 1566.62m,
+                            ValorAliquota = 7.5m,
+                            ValorDeducao = 117.49m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 248,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 69,
+                            IntervaloFinal = 3130.51m,
+                            IntervaloInicial = 2347.86m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 293.58m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 249,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 69,
+                            IntervaloFinal = 3911.63m,
+                            IntervaloInicial = 3130.52m,
+                            ValorAliquota = 22.5m,
+                            ValorDeducao = 528.37m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 250,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 69,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 3911.64m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 723.95m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 251,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 70,
+                            IntervaloFinal = 1637.11m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 252,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 70,
+                            IntervaloFinal = 2453.5m,
+                            IntervaloInicial = 1637.12m,
+                            ValorAliquota = 7.5m,
+                            ValorDeducao = 122.78m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 253,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 70,
+                            IntervaloFinal = 3271.38m,
+                            IntervaloInicial = 2453.51m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 306.8m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 254,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 70,
+                            IntervaloFinal = 4087.65m,
+                            IntervaloInicial = 3271.39m,
+                            ValorAliquota = 22.5m,
+                            ValorDeducao = 552.15m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 255,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 70,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 4087.66m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 756.53m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 256,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 71,
+                            IntervaloFinal = 1710.78m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 257,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 71,
+                            IntervaloFinal = 2563.91m,
+                            IntervaloInicial = 1710.79m,
+                            ValorAliquota = 7.5m,
+                            ValorDeducao = 128.31m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 258,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 71,
+                            IntervaloFinal = 3418.59m,
+                            IntervaloInicial = 2563.92m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 320.6m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 259,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 71,
+                            IntervaloFinal = 4271.59m,
+                            IntervaloInicial = 3418.6m,
+                            ValorAliquota = 22.5m,
+                            ValorDeducao = 577m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 260,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 71,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 4271.6m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 790.58m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 261,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 72,
+                            IntervaloFinal = 1787.77m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 262,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 72,
+                            IntervaloFinal = 2679.29m,
+                            IntervaloInicial = 1787.78m,
+                            ValorAliquota = 7.5m,
+                            ValorDeducao = 134.08m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 263,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 72,
+                            IntervaloFinal = 3572.43m,
+                            IntervaloInicial = 2679.3m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 335.03m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 264,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 72,
+                            IntervaloFinal = 4463.81m,
+                            IntervaloInicial = 3572.44m,
+                            ValorAliquota = 22.5m,
+                            ValorDeducao = 602.96m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 265,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 72,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 4463.82m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 826.15m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 266,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 73,
+                            IntervaloFinal = 1903.98m,
+                            IntervaloInicial = 0m,
+                            ValorAliquota = 0m,
+                            ValorDeducao = 0m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 267,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 73,
+                            IntervaloFinal = 2826.65m,
+                            IntervaloInicial = 1903.99m,
+                            ValorAliquota = 7.5m,
+                            ValorDeducao = 142.8m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 268,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 73,
+                            IntervaloFinal = 3751.05m,
+                            IntervaloInicial = 2826.66m,
+                            ValorAliquota = 15m,
+                            ValorDeducao = 354.8m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 269,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 73,
+                            IntervaloFinal = 4664.68m,
+                            IntervaloInicial = 3751.06m,
+                            ValorAliquota = 22.5m,
+                            ValorDeducao = 636.13m
+                        },
+                        new
+                        {
+                            IdTabelaItem = 270,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdTabela = 73,
+                            IntervaloFinal = 999999.99m,
+                            IntervaloInicial = 4664.69m,
+                            ValorAliquota = 27.5m,
+                            ValorDeducao = 869.36m
                         });
                 });
 
@@ -2690,7 +3872,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                         {
                             IdTabelaTipo = 2,
                             DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descricao = "IRPF"
+                            Descricao = "IRRF"
                         });
                 });
 

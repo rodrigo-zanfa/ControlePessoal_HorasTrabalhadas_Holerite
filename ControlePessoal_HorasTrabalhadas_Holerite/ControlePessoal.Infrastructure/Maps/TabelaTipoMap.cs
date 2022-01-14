@@ -37,7 +37,7 @@ namespace ControlePessoal.Infrastructure.Maps
 
             builder.HasData(
                 new TabelaTipo(idTabelaTipo: 1, descricao: "INSS"),
-                new TabelaTipo(idTabelaTipo: 2, descricao: "IRPF")/*,
+                new TabelaTipo(idTabelaTipo: 2, descricao: "IRRF")/*,
                 new TabelaTipo(idTabelaTipo: , descricao: ""),
                 new TabelaTipo(idTabelaTipo: , descricao: ""),
                 new TabelaTipo(idTabelaTipo: , descricao: ""),

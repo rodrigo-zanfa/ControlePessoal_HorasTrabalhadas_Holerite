@@ -10,28 +10,31 @@ namespace ControlePessoal.Domain.Entities
     public class TabelaItem : Entity
     {
         // construtor usado apenas para a carga inicial de dados
-        public TabelaItem(int idTabelaItem, int idTabela, double intervaloInicial, double intervaloFinal, double valor)
+        public TabelaItem(int idTabelaItem, int idTabela, double intervaloInicial, double intervaloFinal, double valorAliquota, double? valorDeducao)
         {
             IdTabelaItem = idTabelaItem;
             IdTabela = idTabela;
             IntervaloInicial = intervaloInicial;
             IntervaloFinal = intervaloFinal;
-            Valor = valor;
+            ValorAliquota = valorAliquota;
+            ValorDeducao = valorDeducao;
         }
 
-        public TabelaItem(int idTabela, double intervaloInicial, double intervaloFinal, double valor)
+        public TabelaItem(int idTabela, double intervaloInicial, double intervaloFinal, double valorAliquota, double? valorDeducao)
         {
             IdTabela = idTabela;
             IntervaloInicial = intervaloInicial;
             IntervaloFinal = intervaloFinal;
-            Valor = valor;
+            ValorAliquota = valorAliquota;
+            ValorDeducao = valorDeducao;
         }
 
         public int IdTabelaItem { get; private set; }
         public int IdTabela { get; private set; }
         public double IntervaloInicial { get; private set; }
         public double IntervaloFinal { get; private set; }
-        public double Valor { get; private set; }
+        public double ValorAliquota { get; private set; }
+        public double? ValorDeducao { get; private set; }
         public DateTime DataHoraInclusao { get; private set; }
         public DateTime? DataHoraAlteracao { get; private set; }
 
@@ -52,9 +55,14 @@ namespace ControlePessoal.Domain.Entities
             IntervaloFinal = intervaloFinal;
         }
 
-        public void UpdateValor(double valor)
+        public void UpdateValorAliquota(double valorAliquota)
         {
-            Valor = valor;
+            ValorAliquota = valorAliquota;
+        }
+
+        public void UpdateValorDeducao(double valorDeducao)
+        {
+            ValorDeducao = valorDeducao;
         }
 
         public void UpdateDataHoraInclusao(DateTime dataHoraInclusao)
