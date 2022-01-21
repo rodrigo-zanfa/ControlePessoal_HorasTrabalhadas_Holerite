@@ -57,10 +57,11 @@ namespace ControlePessoal.Infrastructure.Maps
             builder.HasKey(x => x.IdParametroTipoDado);
 
             builder.HasData(
-                new ParametroTipoDado(idParametroTipoDado: 1, descricao: "Monetário", tamanhoMin: 1, tamanhoMax: 9, formato: "", intervaloMin: null, intervaloMax: null),
+                new ParametroTipoDado(idParametroTipoDado: 1, descricao: "Monetário", tamanhoMin: 1, tamanhoMax: 9, formato: "", intervaloMin: 0.00, intervaloMax: 999999.99),
                 new ParametroTipoDado(idParametroTipoDado: 2, descricao: "Percentual", tamanhoMin: 1, tamanhoMax: 6, formato: "", intervaloMin: 0.00, intervaloMax: 100.00),
                 new ParametroTipoDado(idParametroTipoDado: 3, descricao: "Data", tamanhoMin: 10, tamanhoMax: 10, formato: "dd/MM/yyyy", intervaloMin: null, intervaloMax: null),
-                new ParametroTipoDado(idParametroTipoDado: 4, descricao: "Hora", tamanhoMin: 5, tamanhoMax: 5, formato: "hh:mm", intervaloMin: null, intervaloMax: null)/*,
+                new ParametroTipoDado(idParametroTipoDado: 4, descricao: "Hora", tamanhoMin: 5, tamanhoMax: 5, formato: "hh:mm", intervaloMin: null, intervaloMax: null),
+                new ParametroTipoDado(idParametroTipoDado: 5, descricao: "Número Inteiro 2 Dígitos", tamanhoMin: 1, tamanhoMax: 2, formato: "", intervaloMin: 0, intervaloMax: 99)/*,
                 new ParametroTipoDado(idParametroTipoDado: , descricao: "", tamanhoMin: , tamanhoMax: , formato: "", intervaloMin: null, intervaloMax: null),
                 new ParametroTipoDado(idParametroTipoDado: , descricao: "", tamanhoMin: , tamanhoMax: , formato: "", intervaloMin: null, intervaloMax: null),
                 new ParametroTipoDado(idParametroTipoDado: , descricao: "", tamanhoMin: , tamanhoMax: , formato: "", intervaloMin: null, intervaloMax: null),
