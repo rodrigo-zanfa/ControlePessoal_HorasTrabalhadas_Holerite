@@ -51,5 +51,73 @@ namespace ControlePessoal.Api.Controllers
 
             return result;
         }
+
+        [HttpGet("Parametro/{idParametro}/{idUsuario}/{dataVigencia}")]
+        public async Task<IActionResult> GetParametroUsuarioByDataVigenciaAsync([FromServices] IParametroUsuarioRepository repository, [FromRoute] int idParametro, [FromRoute] int idUsuario, [FromRoute] DateTime dataVigencia)
+        {
+            try
+            {
+                var result = await repository.GetParametroUsuarioByDataVigenciaAsync(idParametro, idUsuario, dataVigencia);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                var msg = $"Erro ao processar consulta do Parâmetro do Usuário || Message: {ex.Message} || InnerException: {ex.InnerException}";
+
+                return StatusCode(StatusCodes.Status500InternalServerError, msg);
+            }
+        }
+
+        [HttpGet("Salario/{idUsuario}/{dataVigencia}")]
+        public async Task<IActionResult> GetSalarioByDataVigenciaAsync([FromServices] ISalarioRepository repository, [FromRoute] int idUsuario, [FromRoute] DateTime dataVigencia)
+        {
+            try
+            {
+                var result = await repository.GetSalarioByDataVigenciaAsync(idUsuario, dataVigencia);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                var msg = $"Erro ao processar consulta do Salário do Usuário || Message: {ex.Message} || InnerException: {ex.InnerException}";
+
+                return StatusCode(StatusCodes.Status500InternalServerError, msg);
+            }
+        }
+
+        [HttpGet("Inss/Tabela/{dataVigencia}/{valorSalario}")]
+        public async Task<IActionResult> GetTabelaInssCalculadaAsync([FromServices] ITabelaRepository repository, [FromRoute] DateTime dataVigencia, [FromRoute] double valorSalario)
+        {
+            try
+            {
+                var result = await repository.GetTabelaInssCalculadaAsync(dataVigencia, valorSalario);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                var msg = $"Erro ao processar consulta do INSS do Usuário (Tabela) || Message: {ex.Message} || InnerException: {ex.InnerException}";
+
+                return StatusCode(StatusCodes.Status500InternalServerError, msg);
+            }
+        }
+
+        [HttpGet("Inss/Faixas/{dataVigencia}/{valorSalario}")]
+        public async Task<IActionResult> GetFaixasInssCalculadaAsync([FromServices] ITabelaRepository repository, [FromRoute] DateTime dataVigencia, [FromRoute] double valorSalario)
+        {
+            try
+            {
+                var result = await repository.GetFaixasInssCalculadaAsync(dataVigencia, valorSalario);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                var msg = $"Erro ao processar consulta do INSS do Usuário (Faixas) || Message: {ex.Message} || InnerException: {ex.InnerException}";
+
+                return StatusCode(StatusCodes.Status500InternalServerError, msg);
+            }
+        }
     }
 }

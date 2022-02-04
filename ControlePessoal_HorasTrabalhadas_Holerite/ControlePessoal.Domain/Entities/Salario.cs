@@ -9,6 +9,12 @@ namespace ControlePessoal.Domain.Entities
 {
     public class Salario : Entity
     {
+        // construtor usado apenas para consultas com o Dapper
+        public Salario()
+        {
+
+        }
+
         public Salario(int idUsuario, DateTime dataVigenciaInicial, double valor)
         {
             IdUsuario = idUsuario;

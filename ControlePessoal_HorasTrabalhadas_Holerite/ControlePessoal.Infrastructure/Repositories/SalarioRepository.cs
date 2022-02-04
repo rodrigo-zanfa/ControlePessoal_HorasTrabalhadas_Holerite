@@ -2,6 +2,8 @@
 using ControlePessoal.Domain.Queries;
 using ControlePessoal.Domain.Repositories;
 using ControlePessoal.Infrastructure.Contexts;
+using ControlePessoal.Infrastructure.DataAccess;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -66,6 +68,31 @@ namespace ControlePessoal.Infrastructure.Repositories
                 .Where(SalarioQueries.GetAllByUsuario(idUsuario, dataInicial, dataFinal))  //.Where(x => x.IdUsuario == idUsuario && x.DataVigenciaInicial >= dataInicial && x.DataVigenciaInicial <= dataFinal)
                 .OrderBy(x => x.DataVigenciaInicial)
                 .ToList();
+        }
+
+        public async Task<Salario> GetSalarioByDataVigenciaAsync(int idUsuario, DateTime dataVigencia)
+        {
+            using var conn = Connection.GetConnection();
+
+            var salario = await conn.QueryFirstOrDefaultAsync<Salario>(@"
+declare @Sequencia int
+declare @IdSalario int
+
+select top 1
+  @Sequencia = row_number() over (order by s.DataVigenciaInicial desc),
+  @IdSalario = s.IdSalario
+from dbo.APISalario s
+where s.IdUsuario = @IdUsuario
+  and s.DataVigenciaInicial <= @DataVigencia
+
+select
+  s.IdSalario, s.IdUsuario, s.DataVigenciaInicial, s.Valor, s.DataHoraInclusao, s.DataHoraAlteracao
+from dbo.APISalario s
+where s.IdSalario = @IdSalario
+"
+                , new { IdUsuario = idUsuario, DataVigencia = dataVigencia });
+
+            return salario;
         }
     }
 }

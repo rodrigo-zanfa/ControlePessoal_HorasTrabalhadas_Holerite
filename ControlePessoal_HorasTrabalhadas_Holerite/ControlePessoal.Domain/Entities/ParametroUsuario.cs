@@ -9,6 +9,12 @@ namespace ControlePessoal.Domain.Entities
 {
     public class ParametroUsuario : Entity
     {
+        // construtor usado apenas para consultas com o Dapper
+        public ParametroUsuario()
+        {
+
+        }
+
         // construtor usado apenas para a carga inicial de dados
         public ParametroUsuario(int idParametroUsuario, int idParametro, int idUsuario, DateTime dataVigenciaInicial, string valor)
         {
