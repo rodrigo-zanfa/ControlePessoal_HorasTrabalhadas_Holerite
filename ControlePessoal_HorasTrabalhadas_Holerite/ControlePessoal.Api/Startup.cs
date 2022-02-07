@@ -54,6 +54,10 @@ namespace ControlePessoal.Api
             services.AddTransient<ISalarioRepository, SalarioRepository>();
             services.AddTransient<SalarioHandler, SalarioHandler>();
 
+            services.AddTransient<IParametroUsuarioRepository, ParametroUsuarioRepository>();
+
+            services.AddTransient<ITabelaRepository, TabelaRepository>();
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

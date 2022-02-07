@@ -14,7 +14,11 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_DATA_SOURCE": "localhost,1433",
+        "DB_INITIAL_CATALOG": "ControlePessoal2",
+        "DB_USER_ID": "sa",
+        "DB_PASSWORD": "q1w2e3r4t5"
       }
     },
     "ControlePessoal.Api": {
