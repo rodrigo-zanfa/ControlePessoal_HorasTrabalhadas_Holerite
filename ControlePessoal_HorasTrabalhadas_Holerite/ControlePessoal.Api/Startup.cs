@@ -54,6 +54,9 @@ namespace ControlePessoal.Api
             services.AddTransient<ISalarioRepository, SalarioRepository>();
             services.AddTransient<SalarioHandler, SalarioHandler>();
 
+            services.AddTransient<IHoleriteRepository, HoleriteRepository>();
+            services.AddTransient<HoleriteHandler, HoleriteHandler>();
+
             services.AddTransient<IParametroUsuarioRepository, ParametroUsuarioRepository>();
 
             services.AddTransient<ITabelaRepository, TabelaRepository>();
