@@ -20,3 +20,5 @@ select * from [dbo].[APITabelaTipo] order by IdTabelaTipo
 select * from [dbo].[APITabela] order by IdTabela
 
 select * from [dbo].[APITabelaItem] order by IdTabelaItem
+
+select * from [dbo].[APIHolerite] order by IdHolerite

@@ -717,3 +717,75 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+UPDATE [APIParametroTipoDado] SET [IntervaloMax] = 999999.99
+WHERE [IdParametroTipoDado] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametroTipoDado', N'DataHoraAlteracao', N'Descricao', N'Formato', N'IntervaloMax', N'IntervaloMin', N'TamanhoMax', N'TamanhoMin') AND [object_id] = OBJECT_ID(N'[APIParametroTipoDado]'))
+    SET IDENTITY_INSERT [APIParametroTipoDado] ON;
+INSERT INTO [APIParametroTipoDado] ([IdParametroTipoDado], [DataHoraAlteracao], [Descricao], [Formato], [IntervaloMax], [IntervaloMin], [TamanhoMax], [TamanhoMin])
+VALUES (5, NULL, 'Número Inteiro 2 Dígitos', '', 99.0, 0.0, 2, 1);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametroTipoDado', N'DataHoraAlteracao', N'Descricao', N'Formato', N'IntervaloMax', N'IntervaloMin', N'TamanhoMax', N'TamanhoMin') AND [object_id] = OBJECT_ID(N'[APIParametroTipoDado]'))
+    SET IDENTITY_INSERT [APIParametroTipoDado] OFF;
+GO
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametro', N'DataHoraAlteracao', N'Descricao', N'DescricaoDetalhada', N'IdParametroTipoDado') AND [object_id] = OBJECT_ID(N'[APIParametro]'))
+    SET IDENTITY_INSERT [APIParametro] ON;
+INSERT INTO [APIParametro] ([IdParametro], [DataHoraAlteracao], [Descricao], [DescricaoDetalhada], [IdParametroTipoDado])
+VALUES (6, NULL, 'Quantidade de Dependentes', 'Quantidade de Dependentes que o Usuário possui, para fins de desconto do cálculo de IRRF', 5);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametro', N'DataHoraAlteracao', N'Descricao', N'DescricaoDetalhada', N'IdParametroTipoDado') AND [object_id] = OBJECT_ID(N'[APIParametro]'))
+    SET IDENTITY_INSERT [APIParametro] OFF;
+GO
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametroUsuario', N'DataHoraAlteracao', N'DataVigenciaInicial', N'IdParametro', N'IdUsuario', N'Valor') AND [object_id] = OBJECT_ID(N'[APIParametroUsuario]'))
+    SET IDENTITY_INSERT [APIParametroUsuario] ON;
+INSERT INTO [APIParametroUsuario] ([IdParametroUsuario], [DataHoraAlteracao], [DataVigenciaInicial], [IdParametro], [IdUsuario], [Valor])
+VALUES (6, NULL, '2021-01-01', 6, 1, '2');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'IdParametroUsuario', N'DataHoraAlteracao', N'DataVigenciaInicial', N'IdParametro', N'IdUsuario', N'Valor') AND [object_id] = OBJECT_ID(N'[APIParametroUsuario]'))
+    SET IDENTITY_INSERT [APIParametroUsuario] OFF;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220121181237_07Parametros', N'5.0.13');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [APIHolerite] (
+    [IdHolerite] int NOT NULL IDENTITY,
+    [IdUsuario] int NOT NULL,
+    [Descricao] varchar(100) NOT NULL,
+    [DataInicialPonto] date NOT NULL,
+    [DataFinalPonto] date NOT NULL,
+    [DataPagamentoAdiantamento] date NOT NULL,
+    [DataPagamento] date NOT NULL,
+    [DataInicialHoraExtraNormal] date NULL,
+    [DataFinalHoraExtraNormal] date NULL,
+    [DataInicialHoraExtraAdicional] date NULL,
+    [DataFinalHoraExtraAdicional] date NULL,
+    [DataHoraInclusao] datetime NOT NULL,
+    [DataHoraAlteracao] datetime NULL,
+    CONSTRAINT [PK_APIHolerite] PRIMARY KEY ([IdHolerite]),
+    CONSTRAINT [FK_APIHolerite_APIUsuario_IdUsuario] FOREIGN KEY ([IdUsuario]) REFERENCES [APIUsuario] ([IdUsuario])
+);
+GO
+
+CREATE INDEX [IX_APIHolerite_IdUsuario] ON [APIHolerite] ([IdUsuario]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220205134300_08Holerite', N'5.0.13');
+GO
+
+COMMIT;
+GO
+
