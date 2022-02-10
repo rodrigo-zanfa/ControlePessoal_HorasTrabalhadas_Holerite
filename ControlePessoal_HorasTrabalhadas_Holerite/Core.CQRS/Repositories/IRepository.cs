@@ -9,9 +9,9 @@ namespace Core.CQRS.Repositories
 {
     public interface IRepository<T> where T : Entity
     {
-        void Create(T entity);
-        void Update(T entity);
-        IEnumerable<T> GetAll();
-        T GetById(int id);
+        Task CreateAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByIdAsync(int id);
     }
 }

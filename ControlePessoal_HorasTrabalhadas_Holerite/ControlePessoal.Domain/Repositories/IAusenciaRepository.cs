@@ -10,6 +10,6 @@ namespace ControlePessoal.Domain.Repositories
 {
     public interface IAusenciaRepository : IRepository<Ausencia>
     {
-        IEnumerable<Ausencia> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal);
+        Task<IEnumerable<Ausencia>> GetAllByUsuarioAsync(int idUsuario, DateTime dataInicial, DateTime dataFinal);
     }
 }

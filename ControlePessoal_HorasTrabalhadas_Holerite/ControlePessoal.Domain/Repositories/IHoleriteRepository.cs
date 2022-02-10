@@ -10,6 +10,6 @@ namespace ControlePessoal.Domain.Repositories
 {
     public interface IHoleriteRepository : IRepository<Holerite>
     {
-        IEnumerable<Holerite> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal);
+        Task<IEnumerable<Holerite>> GetAllByUsuarioAsync(int idUsuario, DateTime dataInicial, DateTime dataFinal);
     }
 }

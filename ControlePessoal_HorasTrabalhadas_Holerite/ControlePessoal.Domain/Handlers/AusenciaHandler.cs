@@ -23,7 +23,7 @@ namespace ControlePessoal.Domain.Handlers
             _repository = repository;
         }
 
-        public ICommandResult Handle(CreateAusenciaCommand command)
+        public async Task<ICommandResult> Handle(CreateAusenciaCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -36,13 +36,13 @@ namespace ControlePessoal.Domain.Handlers
             var entity = new Ausencia(command.IdUsuario, command.DataAusencia, command.HoraInicialAusencia, command.HoraFinalAusencia);
 
             // salvar
-            _repository.Create(entity);
+            await _repository.CreateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Ausência criada com sucesso!", entity);
         }
 
-        public ICommandResult Handle(UpdateAusenciaCommand command)
+        public async Task<ICommandResult> Handle(UpdateAusenciaCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -52,7 +52,7 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // recuperar a Entidade
-            var entity = _repository.GetById(command.IdAusencia);
+            var entity = await _repository.GetByIdAsync(command.IdAusencia);
             if (entity == null)
             {
                 return new CommandResult(false, "Ausência não encontrada.", null);
@@ -65,7 +65,7 @@ namespace ControlePessoal.Domain.Handlers
             entity.UpdateHoraFinalAusencia(command.HoraFinalAusencia);
 
             // salvar
-            _repository.Update(entity);
+            await _repository.UpdateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Ausência alterada com sucesso!", entity);

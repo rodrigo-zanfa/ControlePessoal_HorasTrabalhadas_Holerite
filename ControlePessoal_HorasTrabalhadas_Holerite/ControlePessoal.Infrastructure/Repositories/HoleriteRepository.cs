@@ -20,52 +20,52 @@ namespace ControlePessoal.Infrastructure.Repositories
             _dataContext = dataContext;
         }
 
-        public void Create(Holerite entity)
+        public async Task CreateAsync(Holerite entity)
         {
             entity.UpdateDataHoraInclusao(DateTime.Now);
 
-            _dataContext.Holerites.Add(entity);
-            _dataContext.SaveChanges();
+            await _dataContext.Holerites.AddAsync(entity);
+            await _dataContext.SaveChangesAsync();
         }
 
-        public void Update(Holerite entity)
+        public async Task UpdateAsync(Holerite entity)
         {
             entity.UpdateDataHoraAlteracao(DateTime.Now);
 
             _dataContext.Entry(entity).State = EntityState.Modified;
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
 
-        public IEnumerable<Holerite> GetAll()
+        public async Task<IEnumerable<Holerite>> GetAllAsync()
         {
-            return _dataContext
+            return await _dataContext
                 .Holerites
                 .AsNoTracking()
                 .OrderBy(x => x.IdHolerite)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Holerite GetById(int id)
+        public async Task<Holerite> GetByIdAsync(int id)
         {
-            return _dataContext
+            return await _dataContext
                 .Holerites
                 .AsNoTracking()
-                //.FirstOrDefault(x => x.IdHolerite == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
+                //.FirstOrDefaultAsync(x => x.IdHolerite == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
                 .Where(HoleriteQueries.GetById(id))  //.Where(x => x.IdHolerite == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
-        public IEnumerable<Holerite> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal)
+        public async Task<IEnumerable<Holerite>> GetAllByUsuarioAsync(int idUsuario, DateTime dataInicial, DateTime dataFinal)
         {
             dataInicial = new DateTime(dataInicial.Year, dataInicial.Month, dataInicial.Day, 0, 0, 0);
             dataFinal = new DateTime(dataFinal.Year, dataFinal.Month, dataFinal.Day, 23, 59, 59);
 
-            return _dataContext
+            return await _dataContext
                 .Holerites
                 .AsNoTracking()
                 .Where(HoleriteQueries.GetAllByUsuario(idUsuario, dataInicial, dataFinal))  //.Where(x => x.IdUsuario == idUsuario && x.DataPagamento >= dataInicial && x.DataPagamento <= dataFinal)
                 .OrderBy(x => x.DataPagamento)
-                .ToList();
+                .ToListAsync();
         }
     }
 }

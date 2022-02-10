@@ -18,41 +18,42 @@ namespace ControlePessoal.Api.Controllers
     {
         [HttpPost]
         [Route("")]
-        public CommandResult Create([FromServices] UsuarioHandler handler, [FromBody] CreateUsuarioCommand command)
+        public async Task<IActionResult> CreateAsync([FromServices] UsuarioHandler handler, [FromBody] CreateUsuarioCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Created($"/", result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpPut]
         [Route("")]
-        public CommandResult Update([FromServices] UsuarioHandler handler, [FromBody] UpdateUsuarioCommand command)
+        public async Task<IActionResult> UpdateAsync([FromServices] UsuarioHandler handler, [FromBody] UpdateUsuarioCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Ok(result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Usuario> GetAll([FromServices] IUsuarioRepository repository)
+        public async Task<IActionResult> GetAllAsync([FromServices] IUsuarioRepository repository)
         {
-            var result = repository.GetAll();
+            var result = await repository.GetAllAsync();
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
 
         [HttpGet]
         [Route("{idUsuario}")]
-        public Usuario GetById([FromServices] IUsuarioRepository repository, [FromRoute] int idUsuario)
+        public async Task<IActionResult> GetByIdAsync([FromServices] IUsuarioRepository repository, [FromRoute] int idUsuario)
         {
-            var result = repository.GetById(idUsuario);
+            var result = await repository.GetByIdAsync(idUsuario);
 
-            return result;
+            return result != null ? Ok(result) : NoContent();
         }
 
-        [HttpGet("Parametro/{idParametro}/{idUsuario}/{dataVigencia}")]
+        [HttpGet]
+        [Route("Parametro/{idParametro}/{idUsuario}/{dataVigencia}")]
         public async Task<IActionResult> GetParametroUsuarioByDataVigenciaAsync([FromServices] IParametroUsuarioRepository repository, [FromRoute] int idParametro, [FromRoute] int idUsuario, [FromRoute] DateTime dataVigencia)
         {
             try
@@ -69,7 +70,8 @@ namespace ControlePessoal.Api.Controllers
             }
         }
 
-        [HttpGet("Salario/{idUsuario}/{dataVigencia}")]
+        [HttpGet]
+        [Route("Salario/{idUsuario}/{dataVigencia}")]
         public async Task<IActionResult> GetSalarioByDataVigenciaAsync([FromServices] ISalarioRepository repository, [FromRoute] int idUsuario, [FromRoute] DateTime dataVigencia)
         {
             try
@@ -86,7 +88,8 @@ namespace ControlePessoal.Api.Controllers
             }
         }
 
-        [HttpGet("Inss/Tabela/{dataVigencia}/{valorSalario}")]
+        [HttpGet]
+        [Route("Inss/Tabela/{dataVigencia}/{valorSalario}")]
         public async Task<IActionResult> GetTabelaInssCalculadaAsync([FromServices] ITabelaRepository repository, [FromRoute] DateTime dataVigencia, [FromRoute] double valorSalario)
         {
             try
@@ -103,7 +106,8 @@ namespace ControlePessoal.Api.Controllers
             }
         }
 
-        [HttpGet("Inss/Faixas/{dataVigencia}/{valorSalario}")]
+        [HttpGet]
+        [Route("Inss/Faixas/{dataVigencia}/{valorSalario}")]
         public async Task<IActionResult> GetFaixasInssCalculadaAsync([FromServices] ITabelaRepository repository, [FromRoute] DateTime dataVigencia, [FromRoute] double valorSalario)
         {
             try

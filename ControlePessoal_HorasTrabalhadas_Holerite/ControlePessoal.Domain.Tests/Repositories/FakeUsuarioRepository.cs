@@ -22,24 +22,24 @@ namespace ControlePessoal.Domain.Tests.Repositories
             }
         }
 
-        public void Create(Usuario entity)
+        public async Task CreateAsync(Usuario entity)
         {
 
         }
 
-        public void Update(Usuario entity)
+        public async Task UpdateAsync(Usuario entity)
         {
 
         }
 
-        public IEnumerable<Usuario> GetAll()
+        public async Task<IEnumerable<Usuario>> GetAllAsync()
         {
-            return _usuarios;
+            return await Task.Run(() => _usuarios);
         }
 
-        public Usuario GetById(int idUsuario)
+        public async Task<Usuario> GetByIdAsync(int idUsuario)
         {
-            return _usuarios.Where(x => x.IdUsuario == idUsuario).FirstOrDefault();
+            return await Task.Run(() => _usuarios.Where(x => x.IdUsuario == idUsuario).FirstOrDefault());
         }
     }
 }

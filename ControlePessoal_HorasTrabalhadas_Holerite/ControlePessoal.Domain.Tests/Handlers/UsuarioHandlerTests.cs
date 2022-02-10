@@ -23,33 +23,33 @@ namespace ControlePessoal.Domain.Tests.Handlers
         private readonly UsuarioHandler _handler = new(new FakeUsuarioRepository());
 
         [TestMethod]
-        public void DadoUmCreateCommandInvalidoDeveInterromperAExecucao()
+        public async Task DadoUmCreateCommandInvalidoDeveInterromperAExecucao()
         {
-            var result = (CommandResult)_handler.Handle(_invalidCreateCommand);
+            var result = (CommandResult)await _handler.Handle(_invalidCreateCommand);
 
             Assert.AreEqual(result.Success, false);
         }
 
         [TestMethod]
-        public void DadoUmCreateCommandValidoDeveCriarOUsuario()
+        public async Task DadoUmCreateCommandValidoDeveCriarOUsuario()
         {
-            var result = (CommandResult)_handler.Handle(_validCreateCommand);
+            var result = (CommandResult)await _handler.Handle(_validCreateCommand);
 
             Assert.AreEqual(result.Success, true);
         }
 
         [TestMethod]
-        public void DadoUmUpdateCommandInvalidoDeveInterromperAExecucao()
+        public async Task DadoUmUpdateCommandInvalidoDeveInterromperAExecucao()
         {
-            var result = (CommandResult)_handler.Handle(_invalidUpdateCommand);
+            var result = (CommandResult)await _handler.Handle(_invalidUpdateCommand);
 
             Assert.AreEqual(result.Success, false);
         }
 
         [TestMethod]
-        public void DadoUmUpdateCommandValidoDeveCriarOUsuario()
+        public async Task DadoUmUpdateCommandValidoDeveCriarOUsuario()
         {
-            var result = (CommandResult)_handler.Handle(_validUpdateCommand);
+            var result = (CommandResult)await _handler.Handle(_validUpdateCommand);
 
             Assert.AreEqual(result.Success, true);
         }

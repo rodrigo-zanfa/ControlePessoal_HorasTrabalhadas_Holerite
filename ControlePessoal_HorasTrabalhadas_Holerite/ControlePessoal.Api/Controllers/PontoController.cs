@@ -19,56 +19,56 @@ namespace ControlePessoal.Api.Controllers
     {
         [HttpPost]
         [Route("")]
-        public CommandResult Create([FromServices] PontoHandler handler, [FromBody] CreatePontoCommand command)
+        public async Task<IActionResult> CreateAsync([FromServices] PontoHandler handler, [FromBody] CreatePontoCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Created($"/", result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpPut]
         [Route("")]
-        public CommandResult Update([FromServices] PontoHandler handler, [FromBody] UpdatePontoCommand command)
+        public async Task<IActionResult> UpdateAsync([FromServices] PontoHandler handler, [FromBody] UpdatePontoCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Ok(result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Ponto> GetAll([FromServices] IPontoRepository repository)
+        public async Task<IActionResult> GetAllAsync([FromServices] IPontoRepository repository)
         {
-            var result = repository.GetAll();
+            var result = await repository.GetAllAsync();
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
 
         [HttpGet]
         [Route("{idPonto}")]
-        public Ponto GetById([FromServices] IPontoRepository repository, [FromRoute] int idPonto)
+        public async Task<IActionResult> GetByIdAsync([FromServices] IPontoRepository repository, [FromRoute] int idPonto)
         {
-            var result = repository.GetById(idPonto);
+            var result = await repository.GetByIdAsync(idPonto);
 
-            return result;
+            return result != null ? Ok(result) : NoContent();
         }
 
         [HttpPost]
         [Route("lista")]
-        public CommandResult CreateList([FromServices] PontoHandler handler, [FromBody] CreateListPontosCommand command)
+        public async Task<IActionResult> CreateListAsync([FromServices] PontoHandler handler, [FromBody] CreateListPontosCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Created($"/", result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpGet]
         [Route("usuario")]
-        public IEnumerable<Ponto> GetAllByUsuario([FromServices] IPontoRepository repository, [FromBody] GetAllByUsuarioQuery query)
+        public async Task<IActionResult> GetAllByUsuarioAsync([FromServices] IPontoRepository repository, [FromBody] GetAllByUsuarioQuery query)
         {
-            var result = repository.GetAllByUsuario(query.IdUsuario, query.DataInicial, query.DataFinal);
+            var result = await repository.GetAllByUsuarioAsync(query.IdUsuario, query.DataInicial, query.DataFinal);
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
     }
 }

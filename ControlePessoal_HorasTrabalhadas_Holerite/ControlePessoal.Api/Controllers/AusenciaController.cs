@@ -19,47 +19,47 @@ namespace ControlePessoal.Api.Controllers
     {
         [HttpPost]
         [Route("")]
-        public CommandResult Create([FromServices] AusenciaHandler handler, [FromBody] CreateAusenciaCommand command)
+        public async Task<IActionResult> CreateAsync([FromServices] AusenciaHandler handler, [FromBody] CreateAusenciaCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Created($"/", result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpPut]
         [Route("")]
-        public CommandResult Update([FromServices] AusenciaHandler handler, [FromBody] UpdateAusenciaCommand command)
+        public async Task<IActionResult> UpdateAsync([FromServices] AusenciaHandler handler, [FromBody] UpdateAusenciaCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Ok(result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Ausencia> GetAll([FromServices] IAusenciaRepository repository)
+        public async Task<IActionResult> GetAllAsync([FromServices] IAusenciaRepository repository)
         {
-            var result = repository.GetAll();
+            var result = await repository.GetAllAsync();
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
 
         [HttpGet]
         [Route("{idAusencia}")]
-        public Ausencia GetById([FromServices] IAusenciaRepository repository, [FromRoute] int idAusencia)
+        public async Task<IActionResult> GetByIdAsync([FromServices] IAusenciaRepository repository, [FromRoute] int idAusencia)
         {
-            var result = repository.GetById(idAusencia);
+            var result = await repository.GetByIdAsync(idAusencia);
 
-            return result;
+            return result != null ? Ok(result) : NoContent();
         }
 
         [HttpGet]
         [Route("usuario")]
-        public IEnumerable<Ausencia> GetAllByUsuario([FromServices] IAusenciaRepository repository, [FromBody] GetAllByUsuarioQuery query)
+        public async Task<IActionResult> GetAllByUsuarioAsync([FromServices] IAusenciaRepository repository, [FromBody] GetAllByUsuarioQuery query)
         {
-            var result = repository.GetAllByUsuario(query.IdUsuario, query.DataInicial, query.DataFinal);
+            var result = await repository.GetAllByUsuarioAsync(query.IdUsuario, query.DataInicial, query.DataFinal);
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
     }
 }

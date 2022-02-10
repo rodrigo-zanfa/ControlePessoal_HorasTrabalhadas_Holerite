@@ -10,7 +10,7 @@ namespace ControlePessoal.Domain.Repositories
 {
     public interface ISalarioRepository : IRepository<Salario>
     {
-        IEnumerable<Salario> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal);
+        Task<IEnumerable<Salario>> GetAllByUsuarioAsync(int idUsuario, DateTime dataInicial, DateTime dataFinal);
 
         Task<Salario> GetSalarioByDataVigenciaAsync(int idUsuario, DateTime dataVigencia);
     }

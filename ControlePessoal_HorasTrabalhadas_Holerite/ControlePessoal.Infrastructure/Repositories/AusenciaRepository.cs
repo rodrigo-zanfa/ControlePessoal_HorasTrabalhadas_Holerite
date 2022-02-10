@@ -20,53 +20,53 @@ namespace ControlePessoal.Infrastructure.Repositories
             _dataContext = dataContext;
         }
 
-        public void Create(Ausencia entity)
+        public async Task CreateAsync(Ausencia entity)
         {
             entity.UpdateDataHoraInclusao(DateTime.Now);
 
-            _dataContext.Ausencias.Add(entity);
-            _dataContext.SaveChanges();
+            await _dataContext.Ausencias.AddAsync(entity);
+            await _dataContext.SaveChangesAsync();
         }
 
-        public void Update(Ausencia entity)
+        public async Task UpdateAsync(Ausencia entity)
         {
             entity.UpdateDataHoraAlteracao(DateTime.Now);
 
             _dataContext.Entry(entity).State = EntityState.Modified;
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
 
-        public IEnumerable<Ausencia> GetAll()
+        public async Task<IEnumerable<Ausencia>> GetAllAsync()
         {
-            return _dataContext
+            return await _dataContext
                 .Ausencias
                 .AsNoTracking()
                 .OrderBy(x => x.IdAusencia)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Ausencia GetById(int id)
+        public async Task<Ausencia> GetByIdAsync(int id)
         {
-            return _dataContext
+            return await _dataContext
                 .Ausencias
                 .AsNoTracking()
-                //.FirstOrDefault(x => x.IdAusencia == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
+                //.FirstOrDefaultAsync(x => x.IdAusencia == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
                 .Where(AusenciaQueries.GetById(id))  //.Where(x => x.IdAusencia == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
-        public IEnumerable<Ausencia> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal)
+        public async Task<IEnumerable<Ausencia>> GetAllByUsuarioAsync(int idUsuario, DateTime dataInicial, DateTime dataFinal)
         {
             dataInicial = new DateTime(dataInicial.Year, dataInicial.Month, dataInicial.Day, 0, 0, 0);
             dataFinal = new DateTime(dataFinal.Year, dataFinal.Month, dataFinal.Day, 23, 59, 59);
 
-            return _dataContext
+            return await _dataContext
                 .Ausencias
                 .AsNoTracking()
                 .Where(AusenciaQueries.GetAllByUsuario(idUsuario, dataInicial, dataFinal))  //.Where(x => x.IdUsuario == idUsuario && x.DataAusencia >= dataInicial && x.DataAusencia <= dataFinal)
                 .OrderBy(x => x.DataAusencia)
                 .ThenBy(x => x.HoraInicialAusencia)
-                .ToList();
+                .ToListAsync();
         }
     }
 }
