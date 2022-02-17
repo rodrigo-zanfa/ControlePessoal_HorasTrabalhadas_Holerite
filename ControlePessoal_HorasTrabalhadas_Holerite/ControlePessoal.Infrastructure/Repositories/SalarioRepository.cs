@@ -22,52 +22,52 @@ namespace ControlePessoal.Infrastructure.Repositories
             _dataContext = dataContext;
         }
 
-        public void Create(Salario entity)
+        public async Task CreateAsync(Salario entity)
         {
             entity.UpdateDataHoraInclusao(DateTime.Now);
 
-            _dataContext.Salarios.Add(entity);
-            _dataContext.SaveChanges();
+            await _dataContext.Salarios.AddAsync(entity);
+            await _dataContext.SaveChangesAsync();
         }
 
-        public void Update(Salario entity)
+        public async Task UpdateAsync(Salario entity)
         {
             entity.UpdateDataHoraAlteracao(DateTime.Now);
 
             _dataContext.Entry(entity).State = EntityState.Modified;
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
 
-        public IEnumerable<Salario> GetAll()
+        public async Task<IEnumerable<Salario>> GetAllAsync()
         {
-            return _dataContext
+            return await _dataContext
                 .Salarios
                 .AsNoTracking()
                 .OrderBy(x => x.IdSalario)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Salario GetById(int id)
+        public async Task<Salario> GetByIdAsync(int id)
         {
-            return _dataContext
+            return await _dataContext
                 .Salarios
                 .AsNoTracking()
-                //.FirstOrDefault(x => x.IdSalario == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
+                //.FirstOrDefaultAsync(x => x.IdSalario == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
                 .Where(SalarioQueries.GetById(id))  //.Where(x => x.IdSalario == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
-        public IEnumerable<Salario> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal)
+        public async Task<IEnumerable<Salario>> GetAllByUsuarioAsync(int idUsuario, DateTime dataInicial, DateTime dataFinal)
         {
             dataInicial = new DateTime(dataInicial.Year, dataInicial.Month, dataInicial.Day, 0, 0, 0);
             dataFinal = new DateTime(dataFinal.Year, dataFinal.Month, dataFinal.Day, 23, 59, 59);
 
-            return _dataContext
+            return await _dataContext
                 .Salarios
                 .AsNoTracking()
                 .Where(SalarioQueries.GetAllByUsuario(idUsuario, dataInicial, dataFinal))  //.Where(x => x.IdUsuario == idUsuario && x.DataVigenciaInicial >= dataInicial && x.DataVigenciaInicial <= dataFinal)
                 .OrderBy(x => x.DataVigenciaInicial)
-                .ToList();
+                .ToListAsync();
         }
 
         public async Task<Salario> GetSalarioByDataVigenciaAsync(int idUsuario, DateTime dataVigencia)

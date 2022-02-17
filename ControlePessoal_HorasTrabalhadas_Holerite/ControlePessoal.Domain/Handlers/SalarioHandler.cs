@@ -23,7 +23,7 @@ namespace ControlePessoal.Domain.Handlers
             _repository = repository;
         }
 
-        public ICommandResult Handle(CreateSalarioCommand command)
+        public async Task<ICommandResult> Handle(CreateSalarioCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -36,13 +36,13 @@ namespace ControlePessoal.Domain.Handlers
             var entity = new Salario(command.IdUsuario, command.DataVigenciaInicial, command.Valor);
 
             // salvar
-            _repository.Create(entity);
+            await _repository.CreateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Salário criado com sucesso!", entity);
         }
 
-        public ICommandResult Handle(UpdateSalarioCommand command)
+        public async Task<ICommandResult> Handle(UpdateSalarioCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -52,7 +52,7 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // recuperar a Entidade
-            var entity = _repository.GetById(command.IdSalario);
+            var entity = await _repository.GetByIdAsync(command.IdSalario);
             if (entity == null)
             {
                 return new CommandResult(false, "Salário não encontrado.", null);
@@ -64,7 +64,7 @@ namespace ControlePessoal.Domain.Handlers
             entity.UpdateValor(command.Valor);
 
             // salvar
-            _repository.Update(entity);
+            await _repository.UpdateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Salário alterado com sucesso!", entity);

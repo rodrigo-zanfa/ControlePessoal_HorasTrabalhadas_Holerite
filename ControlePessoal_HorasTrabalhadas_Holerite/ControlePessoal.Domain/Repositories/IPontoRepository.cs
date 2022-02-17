@@ -10,6 +10,6 @@ namespace ControlePessoal.Domain.Repositories
 {
     public interface IPontoRepository : IRepository<Ponto>
     {
-        IEnumerable<Ponto> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal);
+        Task<IEnumerable<Ponto>> GetAllByUsuarioAsync(int idUsuario, DateTime dataInicial, DateTime dataFinal);
     }
 }

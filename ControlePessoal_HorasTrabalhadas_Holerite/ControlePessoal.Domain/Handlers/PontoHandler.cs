@@ -24,7 +24,7 @@ namespace ControlePessoal.Domain.Handlers
             _repository = repository;
         }
 
-        public ICommandResult Handle(CreatePontoCommand command)
+        public async Task<ICommandResult> Handle(CreatePontoCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -37,13 +37,13 @@ namespace ControlePessoal.Domain.Handlers
             var entity = new Ponto(command.IdUsuario, command.DataPonto, command.HoraPonto);
 
             // salvar
-            _repository.Create(entity);
+            await _repository.CreateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Ponto criado com sucesso!", entity);
         }
 
-        public ICommandResult Handle(UpdatePontoCommand command)
+        public async Task<ICommandResult> Handle(UpdatePontoCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -53,7 +53,7 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // recuperar a Entidade
-            var entity = _repository.GetById(command.IdPonto);
+            var entity = await _repository.GetByIdAsync(command.IdPonto);
             if (entity == null)
             {
                 return new CommandResult(false, "Ponto não encontrado.", null);
@@ -65,13 +65,13 @@ namespace ControlePessoal.Domain.Handlers
             entity.UpdateHoraPonto(command.HoraPonto);
 
             // salvar
-            _repository.Update(entity);
+            await _repository.UpdateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Ponto alterado com sucesso!", entity);
         }
 
-        public ICommandResult Handle(CreateListPontosCommand command)
+        public async Task<ICommandResult> Handle(CreateListPontosCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -86,7 +86,7 @@ namespace ControlePessoal.Domain.Handlers
                 var entity = new Ponto(command.IdUsuario, item.DataPonto, item.HoraPonto);
 
                 // salvar
-                _repository.Create(entity);
+                await _repository.CreateAsync(entity);
             }
 
             // retornar o resultado

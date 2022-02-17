@@ -19,47 +19,47 @@ namespace ControlePessoal.Api.Controllers
     {
         [HttpPost]
         [Route("")]
-        public CommandResult Create([FromServices] SalarioHandler handler, [FromBody] CreateSalarioCommand command)
+        public async Task<IActionResult> CreateAsync([FromServices] SalarioHandler handler, [FromBody] CreateSalarioCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Created($"/", result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpPut]
         [Route("")]
-        public CommandResult Update([FromServices] SalarioHandler handler, [FromBody] UpdateSalarioCommand command)
+        public async Task<IActionResult> UpdateAsync([FromServices] SalarioHandler handler, [FromBody] UpdateSalarioCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Ok(result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Salario> GetAll([FromServices] ISalarioRepository repository)
+        public async Task<IActionResult> GetAllAsync([FromServices] ISalarioRepository repository)
         {
-            var result = repository.GetAll();
+            var result = await repository.GetAllAsync();
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
 
         [HttpGet]
         [Route("{idSalario}")]
-        public Salario GetById([FromServices] ISalarioRepository repository, [FromRoute] int idSalario)
+        public async Task<IActionResult> GetByIdAsync([FromServices] ISalarioRepository repository, [FromRoute] int idSalario)
         {
-            var result = repository.GetById(idSalario);
+            var result = await repository.GetByIdAsync(idSalario);
 
-            return result;
+            return result != null ? Ok(result) : NoContent();
         }
 
         [HttpGet]
         [Route("usuario")]
-        public IEnumerable<Salario> GetAllByUsuario([FromServices] ISalarioRepository repository, [FromBody] GetAllByUsuarioQuery query)
+        public async Task<IActionResult> GetAllByUsuarioAsync([FromServices] ISalarioRepository repository, [FromBody] GetAllByUsuarioQuery query)
         {
-            var result = repository.GetAllByUsuario(query.IdUsuario, query.DataInicial, query.DataFinal);
+            var result = await repository.GetAllByUsuarioAsync(query.IdUsuario, query.DataInicial, query.DataFinal);
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
     }
 }

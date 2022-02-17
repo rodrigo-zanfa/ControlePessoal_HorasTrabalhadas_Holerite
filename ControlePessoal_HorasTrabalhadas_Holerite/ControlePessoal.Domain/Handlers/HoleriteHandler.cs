@@ -23,7 +23,7 @@ namespace ControlePessoal.Domain.Handlers
             _repository = repository;
         }
 
-        public ICommandResult Handle(CreateHoleriteCommand command)
+        public async Task<ICommandResult> Handle(CreateHoleriteCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -36,13 +36,13 @@ namespace ControlePessoal.Domain.Handlers
             var entity = new Holerite(command.IdUsuario, command.Descricao, command.DataInicialPonto, command.DataFinalPonto, command.DataPagamentoAdiantamento, command.DataPagamento, command.DataInicialHoraExtraNormal, command.DataFinalHoraExtraNormal, command.DataInicialHoraExtraAdicional, command.DataFinalHoraExtraAdicional);
 
             // salvar
-            _repository.Create(entity);
+            await _repository.CreateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Holerite criado com sucesso!", entity);
         }
 
-        public ICommandResult Handle(UpdateHoleriteCommand command)
+        public async Task<ICommandResult> Handle(UpdateHoleriteCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -52,7 +52,7 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // recuperar a Entidade
-            var entity = _repository.GetById(command.IdHolerite);
+            var entity = await _repository.GetByIdAsync(command.IdHolerite);
             if (entity == null)
             {
                 return new CommandResult(false, "Holerite não encontrado.", null);
@@ -71,7 +71,7 @@ namespace ControlePessoal.Domain.Handlers
             entity.UpdateDataFinalHoraExtraAdicional(command.DataFinalHoraExtraAdicional);
 
             // salvar
-            _repository.Update(entity);
+            await _repository.UpdateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Holerite alterado com sucesso!", entity);

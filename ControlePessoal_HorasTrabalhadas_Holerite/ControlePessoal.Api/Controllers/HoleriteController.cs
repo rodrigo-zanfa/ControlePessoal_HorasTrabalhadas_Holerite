@@ -19,47 +19,47 @@ namespace ControlePessoal.Api.Controllers
     {
         [HttpPost]
         [Route("")]
-        public CommandResult Create([FromServices] HoleriteHandler handler, [FromBody] CreateHoleriteCommand command)
+        public async Task<IActionResult> CreateAsync([FromServices] HoleriteHandler handler, [FromBody] CreateHoleriteCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Created($"/", result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpPut]
         [Route("")]
-        public CommandResult Update([FromServices] HoleriteHandler handler, [FromBody] UpdateHoleriteCommand command)
+        public async Task<IActionResult> UpdateAsync([FromServices] HoleriteHandler handler, [FromBody] UpdateHoleriteCommand command)
         {
-            var result = (CommandResult)handler.Handle(command);
+            var result = (CommandResult)await handler.Handle(command);
 
-            return result;
+            return result.Success ? Ok(result) : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Holerite> GetAll([FromServices] IHoleriteRepository repository)
+        public async Task<IActionResult> GetAllAsync([FromServices] IHoleriteRepository repository)
         {
-            var result = repository.GetAll();
+            var result = await repository.GetAllAsync();
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
 
         [HttpGet]
         [Route("{idHolerite}")]
-        public Holerite GetById([FromServices] IHoleriteRepository repository, [FromRoute] int idHolerite)
+        public async Task<IActionResult> GetByIdAsync([FromServices] IHoleriteRepository repository, [FromRoute] int idHolerite)
         {
-            var result = repository.GetById(idHolerite);
+            var result = await repository.GetByIdAsync(idHolerite);
 
-            return result;
+            return result != null ? Ok(result) : NoContent();
         }
 
         [HttpGet]
         [Route("usuario")]
-        public IEnumerable<Holerite> GetAllByUsuario([FromServices] IHoleriteRepository repository, [FromBody] GetAllByUsuarioQuery query)
+        public async Task<IActionResult> GetAllByUsuarioAsync([FromServices] IHoleriteRepository repository, [FromBody] GetAllByUsuarioQuery query)
         {
-            var result = repository.GetAllByUsuario(query.IdUsuario, query.DataInicial, query.DataFinal);
+            var result = await repository.GetAllByUsuarioAsync(query.IdUsuario, query.DataInicial, query.DataFinal);
 
-            return result;
+            return result.Any() ? Ok(result) : NoContent();
         }
     }
 }

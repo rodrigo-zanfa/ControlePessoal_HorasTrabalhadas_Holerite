@@ -23,7 +23,7 @@ namespace ControlePessoal.Domain.Handlers
             _repository = repository;
         }
 
-        public ICommandResult Handle(CreateUsuarioCommand command)
+        public async Task<ICommandResult> Handle(CreateUsuarioCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -36,13 +36,13 @@ namespace ControlePessoal.Domain.Handlers
             var entity = new Usuario(command.Nome);
 
             // salvar
-            _repository.Create(entity);
+            await _repository.CreateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Usuário criado com sucesso!", entity);
         }
 
-        public ICommandResult Handle(UpdateUsuarioCommand command)
+        public async Task<ICommandResult> Handle(UpdateUsuarioCommand command)
         {
             // Fail Fast Validations
             command.Validate();
@@ -52,7 +52,7 @@ namespace ControlePessoal.Domain.Handlers
             }
 
             // recuperar a Entidade
-            var entity = _repository.GetById(command.IdUsuario);
+            var entity = await _repository.GetByIdAsync(command.IdUsuario);
             if (entity == null)
             {
                 return new CommandResult(false, "Usuário não encontrado.", null);
@@ -62,7 +62,7 @@ namespace ControlePessoal.Domain.Handlers
             entity.UpdateNome(command.Nome);
 
             // salvar
-            _repository.Update(entity);
+            await _repository.UpdateAsync(entity);
 
             // retornar o resultado
             return new CommandResult(true, "Usuário alterado com sucesso!", entity);

@@ -20,39 +20,39 @@ namespace ControlePessoal.Infrastructure.Repositories
             _dataContext = dataContext;
         }
 
-        public void Create(Usuario entity)
+        public async Task CreateAsync(Usuario entity)
         {
             entity.UpdateDataHoraInclusao(DateTime.Now);
 
-            _dataContext.Usuarios.Add(entity);
-            _dataContext.SaveChanges();
+            await _dataContext.Usuarios.AddAsync(entity);
+            await _dataContext.SaveChangesAsync();
         }
 
-        public void Update(Usuario entity)
+        public async Task UpdateAsync(Usuario entity)
         {
             entity.UpdateDataHoraAlteracao(DateTime.Now);
 
             _dataContext.Entry(entity).State = EntityState.Modified;
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
 
-        public IEnumerable<Usuario> GetAll()
+        public async Task<IEnumerable<Usuario>> GetAllAsync()
         {
-            return _dataContext
+            return await _dataContext
                 .Usuarios
                 .AsNoTracking()
                 .OrderBy(x => x.IdUsuario)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Usuario GetById(int id)
+        public async Task<Usuario> GetByIdAsync(int id)
         {
-            return _dataContext
+            return await _dataContext
                 .Usuarios
                 .AsNoTracking()
-                //.FirstOrDefault(x => x.IdUsuario == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
+                //.FirstOrDefaultAsync(x => x.IdUsuario == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
                 .Where(UsuarioQueries.GetById(id))  //.Where(x => x.IdUsuario == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
     }
 }

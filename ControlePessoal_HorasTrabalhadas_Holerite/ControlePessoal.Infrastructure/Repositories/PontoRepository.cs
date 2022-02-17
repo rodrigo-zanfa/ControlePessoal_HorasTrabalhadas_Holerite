@@ -20,53 +20,53 @@ namespace ControlePessoal.Infrastructure.Repositories
             _dataContext = dataContext;
         }
 
-        public void Create(Ponto entity)
+        public async Task CreateAsync(Ponto entity)
         {
             entity.UpdateDataHoraInclusao(DateTime.Now);
 
-            _dataContext.Pontos.Add(entity);
-            _dataContext.SaveChanges();
+            await _dataContext.Pontos.AddAsync(entity);
+            await _dataContext.SaveChangesAsync();
         }
 
-        public void Update(Ponto entity)
+        public async Task UpdateAsync(Ponto entity)
         {
             entity.UpdateDataHoraAlteracao(DateTime.Now);
 
             _dataContext.Entry(entity).State = EntityState.Modified;
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
 
-        public IEnumerable<Ponto> GetAll()
+        public async Task<IEnumerable<Ponto>> GetAllAsync()
         {
-            return _dataContext
+            return await _dataContext
                 .Pontos
                 .AsNoTracking()
                 .OrderBy(x => x.IdPonto)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Ponto GetById(int id)
+        public async Task<Ponto> GetByIdAsync(int id)
         {
-            return _dataContext
+            return await _dataContext
                 .Pontos
                 .AsNoTracking()
-                //.FirstOrDefault(x => x.IdPonto == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
+                //.FirstOrDefaultAsync(x => x.IdPonto == id);  // TODO: testar para comparar qual dos casos (este ou o de baixo) gera um SQL mais performático
                 .Where(PontoQueries.GetById(id))  //.Where(x => x.IdPonto == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
-        public IEnumerable<Ponto> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal)
+        public async Task<IEnumerable<Ponto>> GetAllByUsuarioAsync(int idUsuario, DateTime dataInicial, DateTime dataFinal)
         {
             dataInicial = new DateTime(dataInicial.Year, dataInicial.Month, dataInicial.Day, 0, 0, 0);
             dataFinal = new DateTime(dataFinal.Year, dataFinal.Month, dataFinal.Day, 23, 59, 59);
 
-            return _dataContext
+            return await _dataContext
                 .Pontos
                 .AsNoTracking()
                 .Where(PontoQueries.GetAllByUsuario(idUsuario, dataInicial, dataFinal))  //.Where(x => x.IdUsuario == idUsuario && x.DataPonto >= dataInicial && x.DataPonto <= dataFinal)
                 .OrderBy(x => x.DataPonto)
                 .ThenBy(x => x.HoraPonto)
-                .ToList();
+                .ToListAsync();
         }
     }
 }
