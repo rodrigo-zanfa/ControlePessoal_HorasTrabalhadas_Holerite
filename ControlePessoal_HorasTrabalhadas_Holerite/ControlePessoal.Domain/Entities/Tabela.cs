@@ -9,6 +9,12 @@ namespace ControlePessoal.Domain.Entities
 {
     public class Tabela : Entity
     {
+        // construtor usado apenas para consultas com o Dapper
+        public Tabela()
+        {
+
+        }
+
         // construtor usado apenas para a carga inicial de dados
         public Tabela(int idTabela, int idTabelaTipo, DateTime dataVigenciaInicial, string descricao, double? valorDeducaoDependente)
         {

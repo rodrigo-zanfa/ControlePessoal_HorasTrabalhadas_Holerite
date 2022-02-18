@@ -11,5 +11,7 @@ namespace ControlePessoal.Domain.Repositories
     {
         Task<TabelaInss> GetTabelaInssCalculadaAsync(DateTime dataVigencia, double valorSalario);
         Task<IEnumerable<FaixaInss>> GetFaixasInssCalculadaAsync(DateTime dataVigencia, double valorSalario);
+        Task<TabelaIrrf> GetTabelaIrrfCalculadaAsync(DateTime dataVigencia, double valorSalario, double valorInss, int qtdDependentes);
+        Task<FaixaIrrf> GetFaixaIrrfCalculadaAsync(DateTime dataVigencia, double valorBaseCalculoIrrf);
     }
 }
