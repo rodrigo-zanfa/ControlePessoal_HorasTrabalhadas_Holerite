@@ -17,7 +17,7 @@ namespace ControlePessoal.Domain.Entities.Shared
 
     public class TabelaInss
     {
-        public double ValorTotal { get; set; }
+        public double ValorTotalInss { get; set; }
         public IEnumerable<FaixaInss> Faixas { get; set; }
     }
 }

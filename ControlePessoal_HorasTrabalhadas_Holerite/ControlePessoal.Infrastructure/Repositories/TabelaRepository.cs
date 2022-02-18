@@ -20,7 +20,7 @@ namespace ControlePessoal.Infrastructure.Repositories
             var listaFaixaInss = await GetFaixasInssCalculadaAsync(dataVigencia, valorSalario);
 
             result.Faixas = listaFaixaInss;
-            result.ValorTotal = listaFaixaInss.Sum(x => x.ValorCalculadoSalario);
+            result.ValorTotalInss = listaFaixaInss.Sum(x => x.ValorCalculadoSalario);
 
             return result;
         }
@@ -75,6 +75,56 @@ namespace ControlePessoal.Infrastructure.Repositories
             return result;
         }
 
+        public async Task<TabelaIrrf> GetTabelaIrrfCalculadaAsync(DateTime dataVigencia, double valorSalario, double valorInss, int qtdDependentes)
+        {
+            var result = new TabelaIrrf();
+
+            result.ValorSalario = valorSalario;
+            result.ValorDeducaoInss = valorInss;
+            result.QtdDependentes = qtdDependentes;
+            var tabela = await GetTabelaAsync(2, dataVigencia);
+            result.ValorDeducaoPorDependente = tabela.ValorDeducaoDependente ?? 0;
+            result.ValorDeducaoTotalDependentes = result.QtdDependentes * result.ValorDeducaoPorDependente;
+            result.ValorBaseCalculoIrrf = result.ValorSalario - result.ValorDeducaoInss - result.ValorDeducaoTotalDependentes;
+
+            var faixaIrrf = await GetFaixaIrrfCalculadaAsync(dataVigencia, result.ValorBaseCalculoIrrf);
+
+            result.Faixa = faixaIrrf;
+            result.ValorTotalIrrf = faixaIrrf.ValorCalculadoSalario;
+
+            return result;
+        }
+
+        public async Task<FaixaIrrf> GetFaixaIrrfCalculadaAsync(DateTime dataVigencia, double valorBaseCalculoIrrf)
+        {
+            var result = new FaixaIrrf();
+
+            var listaTabelaItem = await GetTabelaItemAsync(2, dataVigencia);
+
+            foreach (var tabelaItem in listaTabelaItem)
+            {
+                if (valorBaseCalculoIrrf >= tabelaItem.IntervaloInicial && valorBaseCalculoIrrf <= tabelaItem.IntervaloFinal)  // caso a base de cálculo esteja entre os intervalos da faixa
+                {
+                    var valorCalculadoFaixa = Math.Round(valorBaseCalculoIrrf * tabelaItem.ValorAliquota / 100, 2);
+                    var valorCalculadoSalario = Math.Round(valorCalculadoFaixa - tabelaItem.ValorDeducao.Value, 2);
+
+                    result = new FaixaIrrf
+                    {
+                        IntervaloInicial = tabelaItem.IntervaloInicial,
+                        IntervaloFinal = tabelaItem.IntervaloFinal,
+                        ValorAliquota = tabelaItem.ValorAliquota,
+                        ValorCalculadoFaixa = valorCalculadoFaixa,
+                        ValorDeducaoFaixa = tabelaItem.ValorDeducao.Value,
+                        ValorCalculadoSalario = valorCalculadoSalario
+                    };
+
+                    break;
+                }
+            }
+
+            return result;
+        }
+
         private async Task<IEnumerable<TabelaItem>> GetTabelaItemAsync(int idTabelaTipo, DateTime dataVigencia)
         {
             using var conn = Connection.GetConnection();
@@ -100,6 +150,31 @@ order by ti.IntervaloInicial
                 , new { IdTabelaTipo = idTabelaTipo, DataVigencia = dataVigencia });
 
             return listaTabelaItem;
+        }
+
+        private async Task<Tabela> GetTabelaAsync(int idTabelaTipo, DateTime dataVigencia)
+        {
+            using var conn = Connection.GetConnection();
+
+            var tabela = await conn.QueryFirstOrDefaultAsync<Tabela>(@"
+declare @Sequencia int
+declare @IdTabela int
+
+select top 1
+  @Sequencia = row_number() over (order by t.DataVigenciaInicial desc),
+  @IdTabela = t.IdTabela
+from dbo.APITabela t
+where t.IdTabelaTipo = @IdTabelaTipo
+  and t.DataVigenciaInicial <= @DataVigencia
+
+select
+  t.IdTabela, t.IdTabelaTipo, t.DataVigenciaInicial, t.Descricao, t.ValorDeducaoDependente, t.DataHoraInclusao, t.DataHoraAlteracao
+from dbo.APITabela t
+where t.IdTabela = @IdTabela
+"
+                , new { IdTabelaTipo = idTabelaTipo, DataVigencia = dataVigencia });
+
+            return tabela;
         }
     }
 }

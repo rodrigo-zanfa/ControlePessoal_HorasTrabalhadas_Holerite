@@ -123,5 +123,41 @@ namespace ControlePessoal.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, msg);
             }
         }
+
+        [HttpGet]
+        [Route("Irrf/Tabela/{dataVigencia}/{valorSalario}/{valorInss}/{qtdDependentes}")]
+        public async Task<IActionResult> GetTabelaIrrfCalculadaAsync([FromServices] ITabelaRepository repository, [FromRoute] DateTime dataVigencia, [FromRoute] double valorSalario, [FromRoute] double valorInss, [FromRoute] int qtdDependentes)
+        {
+            try
+            {
+                var result = await repository.GetTabelaIrrfCalculadaAsync(dataVigencia, valorSalario, valorInss, qtdDependentes);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                var msg = $"Erro ao processar consulta do IRRF do Usuário (Tabela) || Message: {ex.Message} || InnerException: {ex.InnerException}";
+
+                return StatusCode(StatusCodes.Status500InternalServerError, msg);
+            }
+        }
+
+        [HttpGet]
+        [Route("Irrf/Faixa/{dataVigencia}/{valorBaseCalculoIrrf}")]
+        public async Task<IActionResult> GetFaixaIrrfCalculadaAsync([FromServices] ITabelaRepository repository, [FromRoute] DateTime dataVigencia, [FromRoute] double valorBaseCalculoIrrf)
+        {
+            try
+            {
+                var result = await repository.GetFaixaIrrfCalculadaAsync(dataVigencia, valorBaseCalculoIrrf);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                var msg = $"Erro ao processar consulta do IRRF do Usuário (Faixa) || Message: {ex.Message} || InnerException: {ex.InnerException}";
+
+                return StatusCode(StatusCodes.Status500InternalServerError, msg);
+            }
+        }
     }
 }
