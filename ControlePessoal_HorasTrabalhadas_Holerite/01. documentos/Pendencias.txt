@@ -1,0 +1,36 @@
+
+- métodos GET devem ser alterados para não passar mais body
+
+- métodos PUT devem ser alterados para passar o ID na rota e não mais no body
+
+- verificar diferença entre ".Update()" e ".Satate = Modified" no Entity Framework
+
+- alterar Flunt por FluentValidation
+
+- verificar necessidade de quando retornar "Created" informar a url
+
+- implementar o consumo da API de feriados (verificar como subir esta no Docker)
+
+
+
+
+
+
+Parâmetros faltantes para criação e que devem ser usados em algum momento nos cálculos:
+
+- Percentual de adiantamento mensal = 40%
+
+- Percentual até 2 HE diárias (HE Normal) = 60%
+
+- Percentual acima de 2 HE diárias (HE Adicional) = 80%
+
+
+
+
+
+
+Tabelas faltantes:
+
+- HoleriteComponente (gravar os dados e componentes do processamento executado)
+
+- Ferias
