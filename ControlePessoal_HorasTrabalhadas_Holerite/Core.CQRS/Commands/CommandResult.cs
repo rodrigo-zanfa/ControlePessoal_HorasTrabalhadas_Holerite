@@ -8,11 +8,6 @@ namespace Core.CQRS.Commands
 {
     public class CommandResult : ICommandResult
     {
-        public CommandResult()
-        {
-
-        }
-
         public CommandResult(bool success, string message, object data)
         {
             Success = success;
@@ -20,8 +15,8 @@ namespace Core.CQRS.Commands
             Data = data;
         }
 
-        public bool Success { get; set; }
-        public string Message { get; set; }
-        public object Data { get; set; }
+        public bool Success { get; private set; }
+        public string Message { get; private set; }
+        public object Data { get; private set; }
     }
 }

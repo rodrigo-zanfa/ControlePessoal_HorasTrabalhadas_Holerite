@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Core.CQRS.Repositories
 {
-    public interface IRepository<T> where T : Entity
+    public interface IRepository<TEntity> where TEntity : Entity
     {
-        Task CreateAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
+        Task CreateAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity> GetByIdAsync(int id);
     }
 }
