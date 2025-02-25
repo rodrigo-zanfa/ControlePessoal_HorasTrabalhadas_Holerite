@@ -7,19 +7,23 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace ControlePessoal.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220205134300_08Holerite")]
-    partial class _08Holerite
+    [Migration("20250225174307_01CreateDb")]
+    partial class _01CreateDb
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.13")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("ControlePessoal.Domain.Entities.Ausencia", b =>
                 {
@@ -27,8 +31,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdAusencia"));
 
                     b.Property<DateTime>("DataAusencia")
                         .HasColumnType("date");
@@ -52,7 +58,7 @@ namespace ControlePessoal.Infrastructure.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("APIAusencia");
+                    b.ToTable("APIAusencia", (string)null);
                 });
 
             modelBuilder.Entity("ControlePessoal.Domain.Entities.Holerite", b =>
@@ -61,8 +67,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdHolerite"));
 
                     b.Property<DateTime?>("DataFinalHoraExtraAdicional")
                         .HasColumnType("date");
@@ -97,7 +105,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
@@ -106,7 +114,7 @@ namespace ControlePessoal.Infrastructure.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("APIHolerite");
+                    b.ToTable("APIHolerite", (string)null);
                 });
 
             modelBuilder.Entity("ControlePessoal.Domain.Entities.Parametro", b =>
@@ -115,8 +123,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdParametro"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -124,17 +134,17 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<DateTime>("DataHoraInclusao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("DescricaoDetalhada")
                         .IsRequired()
                         .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("IdParametroTipoDado")
                         .HasColumnType("int");
@@ -143,7 +153,7 @@ namespace ControlePessoal.Infrastructure.Migrations
 
                     b.HasIndex("IdParametroTipoDado");
 
-                    b.ToTable("APIParametro");
+                    b.ToTable("APIParametro", (string)null);
 
                     b.HasData(
                         new
@@ -202,8 +212,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdParametroTipoDado"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -211,22 +223,22 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<DateTime>("DataHoraInclusao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Formato")
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.Property<decimal?>("IntervaloMax")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.Property<decimal?>("IntervaloMin")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.Property<int>("TamanhoMax")
                         .HasColumnType("int");
@@ -236,7 +248,7 @@ namespace ControlePessoal.Infrastructure.Migrations
 
                     b.HasKey("IdParametroTipoDado");
 
-                    b.ToTable("APIParametroTipoDado");
+                    b.ToTable("APIParametroTipoDado", (string)null);
 
                     b.HasData(
                         new
@@ -298,8 +310,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdParametroUsuario"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -307,7 +321,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<DateTime>("DataHoraInclusao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<DateTime>("DataVigenciaInicial")
                         .HasColumnType("date");
@@ -321,7 +335,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<string>("Valor")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("IdParametroUsuario");
 
@@ -329,7 +343,7 @@ namespace ControlePessoal.Infrastructure.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("APIParametroUsuario");
+                    b.ToTable("APIParametroUsuario", (string)null);
 
                     b.HasData(
                         new
@@ -394,8 +408,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdPonto"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -416,7 +432,7 @@ namespace ControlePessoal.Infrastructure.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("APIPonto");
+                    b.ToTable("APIPonto", (string)null);
                 });
 
             modelBuilder.Entity("ControlePessoal.Domain.Entities.Salario", b =>
@@ -425,8 +441,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdSalario"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -441,13 +459,13 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.HasKey("IdSalario");
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("APISalario");
+                    b.ToTable("APISalario", (string)null);
                 });
 
             modelBuilder.Entity("ControlePessoal.Domain.Entities.SalarioMinimo", b =>
@@ -456,8 +474,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdSalarioMinimo"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -465,17 +485,17 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<DateTime>("DataHoraInclusao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<DateTime>("DataVigenciaInicial")
                         .HasColumnType("date");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.HasKey("IdSalarioMinimo");
 
-                    b.ToTable("APISalarioMinimo");
+                    b.ToTable("APISalarioMinimo", (string)null);
 
                     b.HasData(
                         new
@@ -710,8 +730,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdTabela"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -719,7 +741,7 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<DateTime>("DataHoraInclusao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<DateTime>("DataVigenciaInicial")
                         .HasColumnType("date");
@@ -727,19 +749,19 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("IdTabelaTipo")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("ValorDeducaoDependente")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.HasKey("IdTabela");
 
                     b.HasIndex("IdTabelaTipo");
 
-                    b.ToTable("APITabela");
+                    b.ToTable("APITabela", (string)null);
 
                     b.HasData(
                         new
@@ -1358,8 +1380,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdTabelaItem"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -1367,28 +1391,28 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<DateTime>("DataHoraInclusao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<int>("IdTabela")
                         .HasColumnType("int");
 
                     b.Property<decimal>("IntervaloFinal")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.Property<decimal>("IntervaloInicial")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.Property<decimal>("ValorAliquota")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.Property<decimal?>("ValorDeducao")
-                        .HasColumnType("numeric(8,2)");
+                        .HasColumnType("numeric(8, 2)");
 
                     b.HasKey("IdTabelaItem");
 
                     b.HasIndex("IdTabela");
 
-                    b.ToTable("APITabelaItem");
+                    b.ToTable("APITabelaItem", (string)null);
 
                     b.HasData(
                         new
@@ -3925,8 +3949,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdTabelaTipo"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -3934,16 +3960,16 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<DateTime>("DataHoraInclusao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("IdTabelaTipo");
 
-                    b.ToTable("APITabelaTipo");
+                    b.ToTable("APITabelaTipo", (string)null);
 
                     b.HasData(
                         new
@@ -3966,8 +3992,10 @@ namespace ControlePessoal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdUsuario"));
 
                     b.Property<DateTime?>("DataHoraAlteracao")
                         .HasColumnType("datetime");
@@ -3978,11 +4006,19 @@ namespace ControlePessoal.Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("IdUsuario");
 
-                    b.ToTable("APIUsuario");
+                    b.ToTable("APIUsuario", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            IdUsuario = 1,
+                            DataHoraInclusao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "RODRIGO ZANFERRARI CARAÇA"
+                        });
                 });
 
             modelBuilder.Entity("ControlePessoal.Domain.Entities.Ausencia", b =>
