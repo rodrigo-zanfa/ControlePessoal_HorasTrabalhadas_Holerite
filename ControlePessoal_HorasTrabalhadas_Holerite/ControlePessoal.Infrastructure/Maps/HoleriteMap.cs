@@ -17,7 +17,8 @@ namespace ControlePessoal.Infrastructure.Maps
 
             builder.Property(x => x.IdHolerite)
                 .ValueGeneratedOnAdd()
-                .UseIdentityColumn();
+                .UseIdentityColumn()
+                .UseMySqlIdentityColumn();
 
             builder.Property(x => x.IdUsuario)
                 .IsRequired();

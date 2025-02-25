@@ -17,7 +17,8 @@ namespace ControlePessoal.Infrastructure.Maps
 
             builder.Property(x => x.IdTabela)
                 .ValueGeneratedOnAdd()
-                .UseIdentityColumn();
+                .UseIdentityColumn()
+                .UseMySqlIdentityColumn();
 
             builder.Property(x => x.IdTabelaTipo)
                 .IsRequired();
@@ -38,7 +39,7 @@ namespace ControlePessoal.Infrastructure.Maps
             builder.Property(x => x.DataHoraInclusao)
                 .IsRequired()
                 .HasColumnType("datetime")
-                .HasDefaultValueSql("getdate()");  // usado apenas para a carga inicial de dados
+                .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));  // usado apenas para a carga inicial de dados
 
             builder.Property(x => x.DataHoraAlteracao)
                 .IsRequired(false)

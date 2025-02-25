@@ -17,7 +17,8 @@ namespace ControlePessoal.Infrastructure.Maps
 
             builder.Property(x => x.IdUsuario)
                 .ValueGeneratedOnAdd()
-                .UseIdentityColumn();
+                .UseIdentityColumn()
+                .UseMySqlIdentityColumn();
 
             builder.Property(x => x.Nome)
                 .IsRequired()
@@ -33,6 +34,10 @@ namespace ControlePessoal.Infrastructure.Maps
                 .HasColumnType("datetime");
 
             builder.HasKey(x => x.IdUsuario);
+
+            builder.HasData(
+                new Usuario(idUsuario: 1, nome: "RODRIGO ZANFERRARI CARAÇA")
+                );
         }
     }
 }
