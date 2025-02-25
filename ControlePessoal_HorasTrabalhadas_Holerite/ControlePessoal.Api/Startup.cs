@@ -1,3 +1,4 @@
+using System;
 using ControlePessoal.Domain.Handlers;
 using ControlePessoal.Domain.Repositories;
 using ControlePessoal.Infrastructure.Contexts;
@@ -5,19 +6,12 @@ using ControlePessoal.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ControlePessoal.Api
 {
@@ -40,7 +34,26 @@ namespace ControlePessoal.Api
             services.AddMvc()
                 .AddNewtonsoftJson();
 
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+            //services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlServer"),
+            //    sqlServerOptionsAction: sqlOptions =>
+            //    {
+            //        sqlOptions.EnableRetryOnFailure(
+            //            maxRetryCount: 10,
+            //            maxRetryDelay: TimeSpan.FromSeconds(30),
+            //            errorNumbersToAdd: null);
+            //    }
+            //    ));
+
+            services.AddDbContext<DataContext>(x => x.UseMySql(Configuration.GetConnectionString("MySql"),
+                ServerVersion.AutoDetect(Configuration.GetConnectionString("MySql")),
+                mySqlOptions =>
+                {
+                    mySqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 10,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null);
+                }
+                ));
 
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<UsuarioHandler, UsuarioHandler>();
