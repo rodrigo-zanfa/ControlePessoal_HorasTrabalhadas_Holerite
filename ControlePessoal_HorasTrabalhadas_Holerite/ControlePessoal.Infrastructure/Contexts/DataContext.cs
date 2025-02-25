@@ -34,7 +34,7 @@ namespace ControlePessoal.Infrastructure.Contexts
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    //optionsBuilder.UseSqlServer("Server=PLANTDEV;Database=FuncionalPlant;User ID=appFuncPlant;Password=@Plant2017");
-        //    optionsBuilder.UseSqlServer("Server=localhost,1433;Database=ControlePessoal2;User ID=sa;Password=q1w2e3r4t5");
+        //    optionsBuilder.UseSqlServer("Server=localhost,1433;Database=ControlePessoal2;User ID=sa;Password=Q!w2e3r4t5");
         //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
