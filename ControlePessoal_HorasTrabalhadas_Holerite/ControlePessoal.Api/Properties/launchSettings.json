@@ -14,16 +14,12 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "DB_DATA_SOURCE": "localhost,1433",
-        "DB_INITIAL_CATALOG": "ControlePessoal2",
-        "DB_USER_ID": "sa",
-        "DB_PASSWORD": "Q!w2e3r4t5"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "ControlePessoal.Api": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",

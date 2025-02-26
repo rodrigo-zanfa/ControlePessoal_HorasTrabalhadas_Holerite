@@ -1,10 +1,12 @@
 ﻿using ControlePessoal.Domain.Entities;
 using ControlePessoal.Domain.Entities.Shared;
 using ControlePessoal.Domain.Repositories;
-using ControlePessoal.Infrastructure.DataAccess;
+using ControlePessoal.Infrastructure.Contexts;
 using Dapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,13 @@ namespace ControlePessoal.Infrastructure.Repositories
 {
     public class TabelaRepository : ITabelaRepository
     {
+        private readonly DataContext _dataContext;
+
+        public TabelaRepository(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
+
         public async Task<TabelaInss> GetTabelaInssCalculadaAsync(DateTime dataVigencia, double valorSalario)
         {
             var result = new TabelaInss();
@@ -127,52 +136,18 @@ namespace ControlePessoal.Infrastructure.Repositories
 
         private async Task<IEnumerable<TabelaItem>> GetTabelaItemAsync(int idTabelaTipo, DateTime dataVigencia)
         {
-            using var conn = Connection.GetConnection();
-
-            var listaTabelaItem = await conn.QueryAsync<TabelaItem>(@"
-declare @Sequencia int
-declare @IdTabela int
-
-select top 1
-  @Sequencia = row_number() over (order by t.DataVigenciaInicial desc),
-  @IdTabela = t.IdTabela
-from dbo.APITabela t
-where t.IdTabelaTipo = @IdTabelaTipo
-  and t.DataVigenciaInicial <= @DataVigencia
-
-select
-  ti.IdTabelaItem, ti.IdTabela, ti.IntervaloInicial, ti.IntervaloFinal, ti.ValorAliquota, ti.ValorDeducao, ti.DataHoraInclusao, ti.DataHoraAlteracao
-from dbo.APITabela t
-  inner join dbo.APITabelaItem ti on t.IdTabela = ti.IdTabela
-where t.IdTabela = @IdTabela
-order by ti.IntervaloInicial
-"
-                , new { IdTabelaTipo = idTabelaTipo, DataVigencia = dataVigencia });
+            var listaTabelaItem = await _dataContext.Database.GetDbConnection().QueryAsync<TabelaItem>("GetTabelaItem",
+                new { p_IdTabelaTipo = idTabelaTipo, p_DataVigencia = dataVigencia },
+                commandType: CommandType.StoredProcedure);
 
             return listaTabelaItem;
         }
 
         private async Task<Tabela> GetTabelaAsync(int idTabelaTipo, DateTime dataVigencia)
         {
-            using var conn = Connection.GetConnection();
-
-            var tabela = await conn.QueryFirstOrDefaultAsync<Tabela>(@"
-declare @Sequencia int
-declare @IdTabela int
-
-select top 1
-  @Sequencia = row_number() over (order by t.DataVigenciaInicial desc),
-  @IdTabela = t.IdTabela
-from dbo.APITabela t
-where t.IdTabelaTipo = @IdTabelaTipo
-  and t.DataVigenciaInicial <= @DataVigencia
-
-select
-  t.IdTabela, t.IdTabelaTipo, t.DataVigenciaInicial, t.Descricao, t.ValorDeducaoDependente, t.DataHoraInclusao, t.DataHoraAlteracao
-from dbo.APITabela t
-where t.IdTabela = @IdTabela
-"
-                , new { IdTabelaTipo = idTabelaTipo, DataVigencia = dataVigencia });
+            var tabela = await _dataContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<Tabela>("GetTabela",
+                new { p_IdTabelaTipo = idTabelaTipo, p_DataVigencia = dataVigencia },
+                commandType: CommandType.StoredProcedure);
 
             return tabela;
         }
