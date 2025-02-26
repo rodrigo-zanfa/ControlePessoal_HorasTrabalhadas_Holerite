@@ -17,7 +17,7 @@ namespace ControlePessoal.Domain.Queries
 
         public static Expression<Func<Holerite, bool>> GetAllByUsuario(int idUsuario, DateTime dataInicial, DateTime dataFinal)
         {
-            return x => x.IdUsuario == idUsuario && x.DataPagamento >= dataInicial && x.DataPagamento <= dataFinal;
+            return x => x.IdUsuario == idUsuario && x.DataInicialPonto >= dataInicial && x.DataFinalPonto <= dataFinal;
         }
     }
 }
